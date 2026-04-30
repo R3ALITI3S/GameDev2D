@@ -95,17 +95,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e192bac4328114abbf9ec4c076c918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  speed: 10
-  jumpForce: 6
   terrainLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   rb: {fileID: 8924920803131765814}
-  sr: {fileID: 2817961618952108067}
   groundCheckDistance: 2
-  squareChar: {fileID: 0}
-  circleChar: {fileID: 1416137229653400716}
-  triangleChar: {fileID: 0}
+  anim: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!1 &7951082752537094747
 GameObject:
   m_ObjectHideFlags: 0
