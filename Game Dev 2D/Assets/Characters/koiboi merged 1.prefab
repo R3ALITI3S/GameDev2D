@@ -42,11 +42,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 6f35b6e8b568ecd47957ba3f2ac7c9b4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 9.99698
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 6f35b6e8b568ecd47957ba3f2ac7c9b4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.27438
+      value: 3.5201893
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 6f35b6e8b568ecd47957ba3f2ac7c9b4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -165,6 +165,9 @@ PrefabInstance:
       addedObject: {fileID: 1115697401455191799}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 6f35b6e8b568ecd47957ba3f2ac7c9b4, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 362576415635249034}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 6f35b6e8b568ecd47957ba3f2ac7c9b4, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 2080660831101764850}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 6f35b6e8b568ecd47957ba3f2ac7c9b4, type: 3}
       insertIndex: -1
@@ -190,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c0e806947b1ff5449111bf0bd05ff10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  enemyStats: {fileID: 362576415635249034}
   aggroDistance: 10
   attackDistance: 3.5
   attackDuration: 2
@@ -202,6 +206,23 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   anim: {fileID: 0}
+--- !u!114 &362576415635249034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902081677528350069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c565a6a1ffc49ad419be4c9ba767743e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
+  enemyDamage: 3
+  enemyMaxHealth: 10
+  enemyCurrentHealth: 10
+  enemySpeed: 3
+  xpValue: 25
 --- !u!95 &2080660831101764850
 Animator:
   serializedVersion: 7

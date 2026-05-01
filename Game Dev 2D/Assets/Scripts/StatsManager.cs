@@ -18,16 +18,9 @@ public class StatsManager : MonoBehaviour
     public float speed;
     public float jumpForce;
 
-    // ------- Enemy Stats -------
-    [Header("Player Combat Stats")]
-    public int enemyDamage;
-
-    [Header("Enemy Health Stats")]
-    public int enemyMaxHealth;
-    public int enemyCurrentHealth;
-
-    [Header("Enemy Movement Stats")]
-    public float enemySpeed;
+    [Header("MISC")]
+    public int xp;
+    public int level;
 
     private void Awake()
     {
@@ -49,7 +42,27 @@ public class StatsManager : MonoBehaviour
         {
             //ResetGame();
         }
+
+        if (xp <= 100)
+        {
+            level = 1;
+        }
+        else if (xp > 100 && xp <= 300)
+        {
+            level = 2;
+        }
+        else if (xp > 300 && xp <= 600)
+        {
+            level = 3;
+        }
+        else if (xp > 600 && xp <= 1000)
+        {
+            level = 4;
+        }
+        else if (xp > 1000)
+        {
+            level = 5;
+        }
     }
 
-    
 }

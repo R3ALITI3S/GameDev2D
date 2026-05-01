@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public EnemyStats enemyStats;
+
     public float aggroDistance;
     public float attackDistance;
     public float attackDuration;
@@ -21,7 +23,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        moveSpeed = StatsManager.Instance.enemySpeed;
+        moveSpeed = enemyStats.enemySpeed;
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponentInChildren<Animator>();
@@ -60,6 +62,11 @@ public class EnemyController : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
             anim.SetBool("Walk", false);
         }
+
+        if (enemyStats.enemyCurrentHealth <= 0)
+        {
+            Die();
+        }
     }
 
     private IEnumerator AttackPlayer(float seconds)
@@ -69,7 +76,7 @@ public class EnemyController : MonoBehaviour
         float playerDistance = Vector2.Distance(transform.position, player.transform.position);
         if (playerDistance <= attackDistance)
         {
-            DamagePlayer(StatsManager.Instance.enemyDamage);
+            DamagePlayer(enemyStats.enemyDamage);
         }
         isAttacking = false;
     }
@@ -78,5 +85,11 @@ public class EnemyController : MonoBehaviour
     private void DamagePlayer(int damage)
     {
         StatsManager.Instance.currentHealth -= damage;
+    }
+
+    private void Die()
+    {
+        StatsManager.Instance.xp += enemyStats.xpValue;
+        Destroy(gameObject);
     }
 }

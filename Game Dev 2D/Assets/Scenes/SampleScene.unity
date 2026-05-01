@@ -356,9 +356,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.004210526
     width: 1
-    height: 1
+    height: 0.9923684
   near clip plane: 0.44
   far clip plane: 1000
   field of view: 34
@@ -570,6 +570,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8a05de0ac134f4f9d01bef6b9da077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachinePixelPerfect
+--- !u!95 &572437838 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2080660831101764850, guid: 0f6ce4ba51a4b43489ab622b66f735c7, type: 3}
+  m_PrefabInstance: {fileID: 1959817706}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -40400,10 +40405,8 @@ MonoBehaviour:
   currentHealth: 10
   speed: 6
   jumpForce: 12
-  enemyDamage: 2
-  enemyMaxHealth: 10
-  enemyCurrentHealth: 10
-  enemySpeed: 2
+  xp: 0
+  level: 0
 --- !u!4 &1235218251
 Transform:
   m_ObjectHideFlags: 0
@@ -40576,6 +40579,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: koiboi merged 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1115697401455191799, guid: 0f6ce4ba51a4b43489ab622b66f735c7, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 572437838}
     - target: {fileID: 2039232696613102870, guid: 0f6ce4ba51a4b43489ab622b66f735c7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.99698

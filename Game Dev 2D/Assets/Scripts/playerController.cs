@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement")]
-    public float speed;
+    public EnemyStats enemyStats;
 
     [Header("Jump")]
-    public float jumpForce = 12f;
     public float groundCheckRadius = 0.5f;
     public LayerMask groundLayer;
 
@@ -30,7 +29,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        speed = StatsManager.Instance.speed;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
     }
@@ -58,6 +56,11 @@ public class PlayerController : MonoBehaviour
 
         
         anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
+
+        if (StatsManager.Instance.currentHealth <= 0)
+        {
+                playerDied();
+        }
     }
 
     void FixedUpdate()
@@ -69,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
         
         rb.linearVelocity = new Vector2(
-            moveInput.x * speed,
+            moveInput.x * StatsManager.Instance.speed,
             rb.linearVelocity.y
         );
     }
@@ -80,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
         anim.SetTrigger("Jump");
 
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, StatsManager.Instance.jumpForce);
     }
 
     void TryAttack()
@@ -101,6 +104,11 @@ public class PlayerController : MonoBehaviour
 
     void DealDamage(int damage)
     {
-        StatsManager.Instance.enemyCurrentHealth -= damage;
+        enemyStats.enemyCurrentHealth -= damage * StatsManager.Instance.level;
+    }
+
+    void playerDied()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
