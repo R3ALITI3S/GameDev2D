@@ -51,11 +51,11 @@ public class PlayerController : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame)
             TryAttack();
 
-        // Flip
+        // Flip the sprite
         if (moveInput.x != 0)
             transform.localScale = new Vector3(Mathf.Sign(moveInput.x), 1, 1);
 
-        // Animation (SAFE)
+        
         anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
     }
 
@@ -63,10 +63,10 @@ public class PlayerController : MonoBehaviour
     {
         if (groundCheck == null) return;
 
-        // SAFE ground check (better than raycast)
+        
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        // MOVEMENT (THIS WAS BROKEN BEFORE)
+        
         rb.linearVelocity = new Vector2(
             moveInput.x * speed,
             rb.linearVelocity.y
