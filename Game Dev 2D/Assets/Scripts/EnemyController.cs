@@ -11,18 +11,42 @@ public class EnemyController : MonoBehaviour
     public int damage;
     public bool isAttacking;
     public bool Walk;
+    private Rigidbody2D rb;
+    public float jumpForce;
+    public LayerMask groundLayer;
+    private float jumpOffset = 0.3f;
 
 
     public Animator anim;
 
     private void Start()
     {
+        moveSpeed = StatsManager.Instance.enemySpeed;
+        rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponentInChildren<Animator>();
     }
     void Update()
     {
-        float playerDistance = Vector3.Distance(transform.position, player.transform.position);
+        //Get walk direction to set origin of raycast
+        float direction = Mathf.Sign(player.transform.position.x - transform.position.x);
+        Vector2 origin = new Vector2(
+            transform.position.x + direction * 0.7f,
+            transform.position.y + jumpOffset
+        );
+
+        //Cast ray to check for ledge
+        float rayDistance = 0.4f;
+        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.right * direction, rayDistance, groundLayer);
+
+        //Jump if at ledge
+        if (hit.collider != null)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        }
+
+        //Attack if within attack distance, else move towards player if within aggro distance
+        float playerDistance = Vector2.Distance(transform.position, player.transform.position);
         if (playerDistance <= attackDistance)
         {
             if (!isAttacking)
@@ -33,7 +57,7 @@ public class EnemyController : MonoBehaviour
         }
         else if (playerDistance <= aggroDistance && playerDistance >= attackDistance)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
             anim.SetBool("Walk", false);
         }
     }
@@ -42,12 +66,17 @@ public class EnemyController : MonoBehaviour
     {
         isAttacking = true;
         yield return new WaitForSeconds(seconds);
-        DamagePlayer(StatsManager.Instance.enemyDamage);
+        float playerDistance = Vector2.Distance(transform.position, player.transform.position);
+        if (playerDistance <= attackDistance)
+        {
+            DamagePlayer(StatsManager.Instance.enemyDamage);
+        }
         isAttacking = false;
     }
 
+
     private void DamagePlayer(int damage)
     {
-        StatsManager.Instance.currentHealth -= StatsManager.Instance.enemyDamage;
+        StatsManager.Instance.currentHealth -= damage;
     }
 }

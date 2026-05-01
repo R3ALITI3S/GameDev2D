@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class StatsManager : MonoBehaviour
@@ -41,4 +42,14 @@ public class StatsManager : MonoBehaviour
             Destroy(gameObject); // Ensure only one instance exists
         }
     }
+
+    void Update()
+    {
+        if (currentHealth <= 0)
+        {
+            //ResetGame();
+        }
+    }
+
+    
 }

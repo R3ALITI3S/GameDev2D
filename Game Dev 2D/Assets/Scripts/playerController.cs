@@ -5,11 +5,11 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    public float speed = 5f;
+    public float speed;
 
     [Header("Jump")]
     public float jumpForce = 12f;
-    public float groundCheckRadius = 0.2f;
+    public float groundCheckRadius = 0.5f;
     public LayerMask groundLayer;
 
     [Header("Refs")]
@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        speed = StatsManager.Instance.speed;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
     }
@@ -94,7 +95,12 @@ public class PlayerController : MonoBehaviour
         anim.SetTrigger("Fight");
 
         yield return new WaitForSeconds(1.2f);
-
+        DealDamage(StatsManager.Instance.damage);
         isAttacking = false;
+    }
+
+    void DealDamage(int damage)
+    {
+        StatsManager.Instance.enemyCurrentHealth -= damage;
     }
 }
