@@ -5,15 +5,36 @@ using TMPro;
 [ExecuteInEditMode]
 public class XPBar : MonoBehaviour
 {
-    public Image maskImage;
+    public Slider xpSlider;
     public TextMeshProUGUI levelText;      // Displays the current level number
     public TextMeshProUGUI levelXpText;    // Displays "current XP in level / XP required for level"
 
     private int lastLevel = -1;
 
+    void OnValidate()
+    {
+        // Keep slider configured for normalized [0,1] operation in editor
+        if (xpSlider != null)
+        {
+            xpSlider.minValue = 0f;
+            xpSlider.maxValue = 1f;
+            xpSlider.wholeNumbers = false;
+        }
+    }
+
+    void Start()
+    {
+        if (xpSlider != null)
+        {
+            xpSlider.minValue = 0f;
+            xpSlider.maxValue = 1f;
+            xpSlider.wholeNumbers = false;
+        }
+    }
+
     void Update()
     {
-        if (maskImage == null || levelText == null || levelXpText == null)
+        if (xpSlider == null || levelText == null || levelXpText == null)
         {
             return;
         }
@@ -22,7 +43,7 @@ public class XPBar : MonoBehaviour
         {
             levelText.text = "1";
             levelXpText.text = "100 / 100";
-            maskImage.fillAmount = 0f;
+            xpSlider.value = 0f;
             return;
         }
 
@@ -47,14 +68,14 @@ public class XPBar : MonoBehaviour
         // If level changed, reset the bar visually before setting the new fill
         if (lastLevel != level)
         {
-            maskImage.fillAmount = 0f;
+            xpSlider.value = 0f;
             lastLevel = level;
         }
 
         // Compute fill for the current level (handle open-ended max for highest level)
         int currentOffset = Mathf.Max(0, xp - minXp);
 
-        float denom; //Represents the XP range for the current level
+        float denom; // Represents the XP range for the current level
         int denomInt;
         if (maxXp == int.MaxValue)
         {
@@ -77,7 +98,8 @@ public class XPBar : MonoBehaviour
             fill = Mathf.Clamp01(currentOffset / denom);
         }
 
-        maskImage.fillAmount = fill;
+        // Use normalized slider (0..1) so behavior matches previous Image.fillAmount usage
+        xpSlider.value = fill;
 
         // Update text fields: show level number and xp progress within the current level
         levelText.text = level.ToString();
