@@ -289,6 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealthBar
   slider: {fileID: 1634932942068175338}
+  enemyStats: {fileID: 362576415635249034}
 --- !u!1 &6426521895765858524
 GameObject:
   m_ObjectHideFlags: 0
