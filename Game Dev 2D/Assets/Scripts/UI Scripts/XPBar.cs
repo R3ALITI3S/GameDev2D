@@ -60,7 +60,7 @@ public class XPBar : MonoBehaviour
         }
         else
         {
-            minXp = levelMax[level - 2] + 1;
+            minXp = levelMax[level - 2] + 1; // For level 2, minXp is 101; for level 3, minXp is 301; etc.
         }
 
         int maxXp = levelMax[Mathf.Clamp(level - 1, 0, levelMax.Length - 1)];
@@ -98,7 +98,7 @@ public class XPBar : MonoBehaviour
             fill = Mathf.Clamp01(currentOffset / denom);
         }
 
-        // Use normalized slider (0..1) so behavior matches previous Image.fillAmount usage
+        // Use normalized slider (0..1)
         xpSlider.value = fill;
 
         // Update text fields: show level number and xp progress within the current level
@@ -110,7 +110,7 @@ public class XPBar : MonoBehaviour
         }
         else
         {
-            levelXpText.text = currentOffset.ToString() + " / " + denomInt.ToString();
+            levelXpText.text = currentOffset.ToString() + " / " + denomInt.ToString(); // Show "current XP in level / XP required for level"
         }
     }
 }
