@@ -601,6 +601,11 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  lootTable:
+  - prefab: {fileID: 4938025311507958313, guid: 60f0005eea9f6a9449a5558c66ab9e35, type: 3}
+    dropChance: 1
+    minAmount: 5
+    maxAmount: 8
   anim: {fileID: 2080660831101764850}
 --- !u!114 &362576415635249034
 MonoBehaviour:
