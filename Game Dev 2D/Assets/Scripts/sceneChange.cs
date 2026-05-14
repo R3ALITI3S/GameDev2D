@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class sceneChange : MonoBehaviour
 {
@@ -12,6 +13,14 @@ public class sceneChange : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             SceneManager.LoadScene(sceneBuildIndex);
+        }
+    }
+
+    public void Update()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            SceneManager.LoadScene("Map");
         }
     }
 }
