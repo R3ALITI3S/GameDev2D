@@ -16,6 +16,11 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public Animator anim;
 
+    [Header("Combat")]
+    public Transform attackPoint;
+    public float attackRange = 0.8f;
+    public LayerMask enemyLayer;
+
     private Vector2 moveInput;
     private bool isGrounded;
     private bool isAttacking;
@@ -104,7 +109,20 @@ public class PlayerController : MonoBehaviour
 
     void DealDamage(int damage)
     {
-        enemyStats.enemyCurrentHealth -= damage * StatsManager.Instance.level;
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
+            attackPoint.position,
+            attackRange,
+            enemyLayer
+        );
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            EnemyStats stats = enemy.GetComponent<EnemyStats>();
+            if (stats != null)
+            {
+                stats.enemyCurrentHealth -= damage;
+            }
+        }
     }
 
     void playerDied()
