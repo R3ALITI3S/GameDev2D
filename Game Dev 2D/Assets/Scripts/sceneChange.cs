@@ -6,7 +6,7 @@ public class sceneChange : MonoBehaviour
     
     [SerializeField] private int sceneBuildIndex;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         // Check if the collision is with the player 
         if (collision.gameObject.CompareTag("Player"))

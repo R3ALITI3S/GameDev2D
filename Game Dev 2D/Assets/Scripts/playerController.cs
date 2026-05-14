@@ -2,40 +2,61 @@
 using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Unity.Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
     public EnemyStats enemyStats;
 
-    [Header("Jump")]
-    public float groundCheckRadius = 0.5f;
-    public LayerMask groundLayer;
-
     [Header("Refs")]
     public Rigidbody2D rb;
-    public Transform groundCheck;
     public Animator anim;
 
+    private SpriteRenderer[] srs;
+
     private Vector2 moveInput;
-    private bool isGrounded;
+
     private bool isAttacking;
+    private bool isDead;
+    private bool canJump = true;
 
     public static PlayerController Instance;
 
+    [SerializeField] private CinemachineCamera cam;
+
     void Awake()
     {
+        // SINGLETON
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
+
+        DontDestroyOnLoad(gameObject);
+
+        if (cam != null)
+            DontDestroyOnLoad(cam.gameObject);
     }
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponentInChildren<Animator>();
+        if (rb == null)
+            rb = GetComponent<Rigidbody2D>();
+
+        if (anim == null)
+            anim = GetComponentInChildren<Animator>();
+
+        srs = GetComponentsInChildren<SpriteRenderer>();
     }
 
     void Update()
     {
-        // INPUT
+        if (isDead) return;
+
+        // MOVEMENT INPUT
         moveInput = Vector2.zero;
 
         if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
@@ -44,33 +65,41 @@ public class PlayerController : MonoBehaviour
         if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
             moveInput.x = 1;
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        // ONE JUMP ONLY
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && canJump)
             TryJump();
 
+        // ATTACK
         if (Mouse.current.leftButton.wasPressedThisFrame)
             TryAttack();
 
-        // Flip the sprite
+        // FLIP PLAYER
         if (moveInput.x != 0)
-            transform.localScale = new Vector3(Mathf.Sign(moveInput.x), 1, 1);
-
-        
-        anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
-
-        if (StatsManager.Instance.currentHealth <= 0)
         {
-                playerDied();
+            transform.localScale = new Vector3(
+                Mathf.Sign(moveInput.x),
+                1,
+                1
+            );
+        }
+
+        // ANIMATION
+        if (anim != null && rb != null)
+            anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
+
+        // DEATH CHECK
+        if (StatsManager.Instance != null &&
+            StatsManager.Instance.currentHealth <= 0)
+        {
+            PlayerDied();
         }
     }
 
     void FixedUpdate()
     {
-        if (groundCheck == null) return;
+        if (rb == null) return;
 
-        
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
-        
+        // MOVEMENT
         rb.linearVelocity = new Vector2(
             moveInput.x * StatsManager.Instance.speed,
             rb.linearVelocity.y
@@ -79,11 +108,23 @@ public class PlayerController : MonoBehaviour
 
     void TryJump()
     {
-        if (!isGrounded) return;
+        if (rb == null) return;
 
-        anim.SetTrigger("Jump");
+        canJump = false;
 
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, StatsManager.Instance.jumpForce);
+        if (anim != null)
+            anim.SetTrigger("Jump");
+
+        rb.linearVelocity = new Vector2(
+            rb.linearVelocity.x,
+            StatsManager.Instance.jumpForce
+        );
+    }
+
+    // JUMPS
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        canJump = true;
     }
 
     void TryAttack()
@@ -95,20 +136,33 @@ public class PlayerController : MonoBehaviour
     IEnumerator AttackRoutine()
     {
         isAttacking = true;
-        anim.SetTrigger("Fight");
+
+        if (anim != null)
+            anim.SetTrigger("Fight");
 
         yield return new WaitForSeconds(1.2f);
+
         DealDamage(StatsManager.Instance.damage);
+
         isAttacking = false;
     }
 
     void DealDamage(int damage)
     {
-        enemyStats.enemyCurrentHealth -= damage * StatsManager.Instance.level;
+        if (enemyStats == null) return;
+
+        enemyStats.enemyCurrentHealth -=
+            damage * StatsManager.Instance.level;
     }
 
-    void playerDied()
+    void PlayerDied()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (isDead) return;
+
+        isDead = true;
+
+        SceneManager.LoadScene(
+            SceneManager.GetActiveScene().buildIndex
+        );
     }
 }
