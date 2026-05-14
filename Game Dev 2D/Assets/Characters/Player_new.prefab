@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2688202164545674153}
   - component: {fileID: 2530430595754743744}
   - component: {fileID: 209619273219790713}
+  - component: {fileID: 3181790528291484496}
   m_Layer: 0
   m_Name: Player_new
   m_TagString: Player
@@ -30,7 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.7037739, y: 3.77, z: -4.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3643674655753304494}
   m_Father: {fileID: 0}
@@ -47,8 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e192bac4328114abbf9ec4c076c918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  speed: 6
-  jumpForce: 10
+  enemyStats: {fileID: 0}
   groundCheckRadius: 2
   groundLayer:
     serializedVersion: 2
@@ -90,8 +90,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.09, y: -0.18}
-  m_Size: {x: 1.75, y: 2.57}
+  m_Offset: {x: -0.09, y: -0.3}
+  m_Size: {x: 2.2, y: 3.39}
   m_Direction: 0
 --- !u!50 &209619273219790713
 Rigidbody2D:
@@ -120,6 +120,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &3181790528291484496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5465993130267649517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb2a173796bcc2342b84c09321cc41a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChangeWeapon
+  weaponRenderer: {fileID: 1393069029771020707}
 --- !u!1001 &2719955098369327216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188,6 +201,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4518476552190699973, guid: 143d0f652baf9f243b7969083edef759, type: 3}
+      propertyPath: m_Name
+      value: WolfWeapon
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -196,6 +213,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8338308897113809714}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 143d0f652baf9f243b7969083edef759, type: 3}
+--- !u!212 &1393069029771020707 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3956997378594605523, guid: 143d0f652baf9f243b7969083edef759, type: 3}
+  m_PrefabInstance: {fileID: 2719955098369327216}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2474999710068220365 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8653719598885068355, guid: 143d0f652baf9f243b7969083edef759, type: 3}

@@ -59,9 +59,29 @@ public class StatsManager : MonoBehaviour
         {
             level = 4;
         }
-        else if (xp > 1000)
+        else if (xp > 1000 && xp <= 1500)
         {
             level = 5;
+        }
+        else if (xp > 1500 && xp <= 2100)
+        {
+            level = 6;
+        }
+        else if (xp > 2100 && xp <= 2800)
+        {
+            level = 7;
+        }
+        else if (xp > 2800 && xp <= 3600)
+        {
+            level = 8;
+        }
+        else if (xp > 3600 && xp <= 4500)
+        {
+            level = 9;
+        }
+        else if (xp > 4500)
+        {
+            level = 10;
         }
     }
 
