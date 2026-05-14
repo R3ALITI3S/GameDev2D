@@ -18,6 +18,16 @@ public class EnemyController : MonoBehaviour
     public LayerMask groundLayer;
     private float jumpOffset = 0.3f;
 
+    [System.Serializable]
+    public class LootItem
+    {
+        public GameObject prefab;
+        [Range(0f, 1f)] public float dropChance;
+        public int minAmount = 1;
+        public int maxAmount = 1;
+    }
+
+    public LootItem[] lootTable;
 
     public Animator anim;
 
@@ -28,6 +38,7 @@ public class EnemyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponentInChildren<Animator>();
     }
+
     void Update()
     {
         //Get walk direction to set origin of raycast
@@ -90,6 +101,37 @@ public class EnemyController : MonoBehaviour
     private void Die()
     {
         StatsManager.Instance.xp += enemyStats.xpValue;
+        DropLoot();
         Destroy(gameObject);
+    }
+
+    void DropLoot()
+    {
+        foreach (var item in lootTable)
+        {
+            if (Random.value <= item.dropChance)
+            {
+                //Spawn random amount of loot between min and max for that loot item eg. 1-1 for legendary sword, 5-10 for coins.
+                int amount = Random.Range(item.minAmount, item.maxAmount + 1);
+
+                for (int i = 0; i < amount; i++)
+                {
+                    Vector3 spawnPos = transform.position + Vector3.up * 0.5f;
+                    GameObject loot = Instantiate(item.prefab, spawnPos, Quaternion.identity);
+
+                    Rigidbody2D rb = loot.GetComponent<Rigidbody2D>();
+                    if (rb != null)
+                    {
+                        //Scatter loot with random force
+                        Vector2 force = new Vector2(
+                            Random.Range(-1f, 1f),
+                            Random.Range(1f, 2f)
+                        ) * Random.Range(2f, 5f);
+
+                        rb.AddForce(force, ForceMode2D.Impulse);
+                    }
+                }
+            }
+        }
     }
 }
