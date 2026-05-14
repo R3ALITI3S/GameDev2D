@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
 
         
         rb.linearVelocity = new Vector2(
-            moveInput.x * StatsManager.Instance.speed * (speedUpgrade * 0.5f),
+            moveInput.x * StatsManager.Instance.speed + (speedUpgrade * 0.4f),
             rb.linearVelocity.y
         );
     }
