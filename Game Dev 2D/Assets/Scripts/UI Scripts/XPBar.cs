@@ -7,6 +7,7 @@ public class XPBar : MonoBehaviour
 {
     public Slider xpSlider;
     public TextMeshProUGUI levelText;      // Displays the current level number
+    public TextMeshProUGUI levelXpText;    // Displays "current XP in level / XP required for level"
 
     private int lastLevel = -1;
 
@@ -33,14 +34,15 @@ public class XPBar : MonoBehaviour
 
     void Update()
     {
-        if (xpSlider == null || levelText == null)
+        if (xpSlider == null || levelText == null || levelXpText == null)
         {
             return;
         }
 
         if (StatsManager.Instance == null)
         {
-            levelText.text = "Level 1";
+            levelText.text = "LV 1";
+            levelXpText.text = "100 / 100 XP";
             xpSlider.value = 0f;
             return;
         }
@@ -100,6 +102,15 @@ public class XPBar : MonoBehaviour
         xpSlider.value = fill;
 
         // Update text fields: show level
-        levelText.text = $"Level {level}";
+        levelText.text = $"LV {level}";
+
+        if (denomInt == -1)
+        {
+            levelXpText.text = currentOffset.ToString() + " / - XP"; // Show when at the highest level
+        }
+        else
+        {
+            levelXpText.text = currentOffset.ToString() + " / " + denomInt.ToString() + " XP";
+        }
     }
 }
