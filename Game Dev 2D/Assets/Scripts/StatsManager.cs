@@ -7,12 +7,12 @@ public class StatsManager : MonoBehaviour
 
     // ------- Player Stats -------
     [Header("Player Combat Stats")]
-    public int damage;
-    public int defense;
+    public float damage;
+    public float defense;
 
     [Header("Player Health Stats")]
-    public int maxHealth;
-    public int currentHealth;
+    public float maxHealth;
+    public float currentHealth;
 
     [Header("Player Movement Stats")]
     public float speed;

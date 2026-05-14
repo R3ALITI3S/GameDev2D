@@ -13,4 +13,9 @@ public class UISceneChange : MonoBehaviour
     {
         SceneManager.LoadScene("Level 1");
     }
+
+    public void GoToMap()
+    {
+        SceneManager.LoadScene("Map");
+    }
 }

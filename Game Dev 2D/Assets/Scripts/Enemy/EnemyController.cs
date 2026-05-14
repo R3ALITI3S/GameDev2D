@@ -4,19 +4,23 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public EnemyStats enemyStats;
+    public StatsUpgrade statsUpgrade;
 
     public float aggroDistance;
     public float attackDistance;
     public float attackDuration;
     private GameObject player;
     public float moveSpeed;
-    public int damage;
+    public float damage;
     public bool isAttacking;
     public bool Walk;
     private Rigidbody2D rb;
     public float jumpForce;
     public LayerMask groundLayer;
     private float jumpOffset = 0.3f;
+
+    private float playerDefense = 1f;
+    private float upgradeDefense = 1f;
 
 
     public Animator anim;
@@ -27,6 +31,9 @@ public class EnemyController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         anim = GetComponentInChildren<Animator>();
+
+        StatsManager.Instance.defense = playerDefense;
+        statsUpgrade.upgradeDefenseAmount = upgradeDefense;
     }
     void Update()
     {
@@ -82,9 +89,9 @@ public class EnemyController : MonoBehaviour
     }
 
 
-    private void DamagePlayer(int damage)
+    private void DamagePlayer(float damage)
     {
-        StatsManager.Instance.currentHealth -= damage;
+        StatsManager.Instance.currentHealth -= damage - (playerDefense * upgradeDefense * 0.1f);
     }
 
     private void Die()

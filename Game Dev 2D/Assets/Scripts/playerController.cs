@@ -2,10 +2,12 @@
 using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEditor.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
     public EnemyStats enemyStats;
+    public StatsUpgrade statsUpgrade;
 
     [Header("Jump")]
     public float groundCheckRadius = 0.5f;
@@ -20,6 +22,13 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private bool isAttacking;
 
+    private float currentHealth;
+
+    private float healthUpgrade = 1f;
+    private float damageUpgrade = 1f;
+    private float defenseUpgrade = 1f;
+    private float speedUpgrade = 1f;
+
     public static PlayerController Instance;
 
     void Awake()
@@ -31,6 +40,23 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
+
+        if (statsUpgrade != null)
+        {
+            statsUpgrade.upgradeHealthAmount = healthUpgrade;
+            statsUpgrade.upgradeDamageAmount = damageUpgrade;
+            statsUpgrade.upgradeDefenseAmount = defenseUpgrade;
+            statsUpgrade.upgradeSpeedAmount = speedUpgrade;
+        }
+
+        // Initialize current health from StatsManager maxHealth (guarding null)
+        if (StatsManager.Instance != null)
+        {
+            if (currentHealth <= 0f)
+                currentHealth = StatsManager.Instance.maxHealth;
+
+            StatsManager.Instance.currentHealth = currentHealth;
+        }
     }
 
     void Update()
@@ -57,7 +83,7 @@ public class PlayerController : MonoBehaviour
         
         anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
 
-        if (StatsManager.Instance.currentHealth <= 0)
+        if (currentHealth <= 0)
         {
                 playerDied();
         }
@@ -72,7 +98,7 @@ public class PlayerController : MonoBehaviour
 
         
         rb.linearVelocity = new Vector2(
-            moveInput.x * StatsManager.Instance.speed,
+            moveInput.x * StatsManager.Instance.speed * (speedUpgrade * 0.5f),
             rb.linearVelocity.y
         );
     }
@@ -102,9 +128,9 @@ public class PlayerController : MonoBehaviour
         isAttacking = false;
     }
 
-    void DealDamage(int damage)
+    void DealDamage(float damage)
     {
-        enemyStats.enemyCurrentHealth -= damage * StatsManager.Instance.level;
+        enemyStats.enemyCurrentHealth -= damage * damageUpgrade;
     }
 
     void playerDied()

@@ -5,7 +5,7 @@ using TMPro;
 //[ExecuteInEditMode] //Makes the script execute in edit mode, allowing you to see changes in the editor without entering play mode
 public class HealthBar : MonoBehaviour
 {
-    public int minimum;
+    public float minimum;
     public Image maskImage;
 
     // Optional TextMeshPro field to show "current / max" health
@@ -42,8 +42,8 @@ public class HealthBar : MonoBehaviour
         // Update health text
         if (healthText != null)
         {
-            int current = Mathf.Clamp(StatsManager.Instance.currentHealth, minimum, StatsManager.Instance.maxHealth);
-            int max = StatsManager.Instance.maxHealth;
+            float current = Mathf.Clamp(StatsManager.Instance.currentHealth, minimum, StatsManager.Instance.maxHealth);
+            float max = StatsManager.Instance.maxHealth;
 
             healthText.SetText("{0} / {100}", current, max);
         }

@@ -3,11 +3,11 @@ using UnityEngine;
 public class EnemyStats : MonoBehaviour
 {
     [Header("Player Combat Stats")]
-    public int enemyDamage;
+    public float enemyDamage;
 
     [Header("Enemy Health Stats")]
-    public int enemyMaxHealth;
-    public int enemyCurrentHealth;
+    public float enemyMaxHealth;
+    public float enemyCurrentHealth;
 
     [Header("Enemy Movement Stats")]
     public float enemySpeed;

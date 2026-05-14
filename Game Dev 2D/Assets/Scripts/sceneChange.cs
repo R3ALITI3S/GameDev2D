@@ -20,7 +20,7 @@ public class sceneChange : MonoBehaviour
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            SceneManager.LoadScene("Map");
+            SceneManager.LoadScene("Upgrade Scene");
         }
     }
 }
