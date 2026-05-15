@@ -1,46 +1,71 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class boss_run : StateMachineBehaviour
 {
-    public float speed = 2.5f;
+    public float speed = 10f;
     public float attackRange = 3f;
+    public float attackCooldown = 2f;
 
-    Transform player;
-    Rigidbody2D rb;
-    Boss boss;
+    private Transform player;
+    private Rigidbody2D rb;
+    private Boss boss;
 
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    private float nextAttackTime;
+    private bool isAttacking;
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        Debug.Log("ENTER RUN STATE");
+
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
         rb = animator.GetComponent<Rigidbody2D>();
         boss = animator.GetComponent<Boss>();
+
+        isAttacking = false;
+
+        if (player == null) Debug.LogError("PLAYER NOT FOUND!");
+        if (rb == null) Debug.LogError("RIGIDBODY2D NOT FOUND!");
+        if (boss == null) Debug.LogError("BOSS SCRIPT NOT FOUND!");
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-{
-
-    boss.LookAtPlayer();
-    Debug.Log("player look!");
-    if (player == null || rb == null) return;
-
-    Vector2 target = new Vector2(player.position.x, rb.position.y);
-    Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.deltaTime);
-
-    rb.MovePosition(newPos);
-    Debug.Log("We movin");
-
-    if (Vector2.Distance(player.position, rb.position) <= attackRange)
     {
-        animator.SetTrigger("Attack");
-    }
-}
+        if (player == null || rb == null || boss == null)
+            return;
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+        float distance = Vector2.Distance(rb.position, player.position);
+
+        // Only flip when NOT attacking
+        if (!isAttacking)
+        {
+            boss.LookAtPlayer();
+        }
+
+        if (distance > attackRange)
+        {
+            Vector2 direction = ((Vector2)player.position - rb.position).normalized;
+            rb.linearVelocity = new Vector2(direction.x * speed, rb.linearVelocity.y);
+        }
+        else
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+
+            if (!isAttacking && Time.time >= nextAttackTime)
+            {
+                isAttacking = true;
+                animator.SetTrigger("StartAttack");
+                nextAttackTime = Time.time + attackCooldown;
+            }
+        }
+    }
+
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("Attack");
-    }
+        isAttacking = false;
 
-    
+        if (rb != null)
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        }
+    }
 }

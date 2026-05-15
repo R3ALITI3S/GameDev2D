@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
             TryJump();
 
         // ATTACK
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Keyboard.current.qKey.isPressed)
             TryAttack();
 
         // FLIP PLAYER
@@ -128,24 +128,25 @@ public class PlayerController : MonoBehaviour
     }
 
     void TryAttack()
-    {
-        if (!isAttacking)
-            StartCoroutine(AttackRoutine());
-    }
+{
+    if (isAttacking) return;
 
-    IEnumerator AttackRoutine()
-    {
-        isAttacking = true;
+    isAttacking = true;
 
-        if (anim != null)
-            anim.SetTrigger("Fight");
+    if (anim != null)
+        anim.SetTrigger("Fight");
 
-        yield return new WaitForSeconds(1.2f);
+    // INSTANT DAMAGE
+    DealDamage(StatsManager.Instance.damage);
 
-        DealDamage(StatsManager.Instance.damage);
+    // SHORT RESET
+    Invoke(nameof(ResetAttack), 0.25f);
+}
 
-        isAttacking = false;
-    }
+void ResetAttack()
+{
+    isAttacking = false;
+}
 
     void DealDamage(int damage)
     {
