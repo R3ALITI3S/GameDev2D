@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(LineRenderer))]
 public class RopeVerlet : MonoBehaviour
 {
+    [Header("Anchors")]
+    [SerializeField] private Transform _startAnchor; // Cat
+    [SerializeField] private Transform _endAnchor;   // Fixed the point
+
     [Header("Rope")]
     [SerializeField] private int _numOfRopeSegments = 50;
     [SerializeField] private float _ropeSegmentLength = 0.225f;
@@ -25,15 +28,13 @@ public class RopeVerlet : MonoBehaviour
     [SerializeField] private int _collisionSegmentInterval = 2;
 
     private LineRenderer _lineRenderer;
-    private readonly List<RopeSegment> _ropeSegments = new();
 
-    private Camera _mainCamera;
+    private readonly List<RopeSegment> _ropeSegments = new();
 
     private void Awake()
     {
-        _mainCamera = Camera.main;
-
         _lineRenderer = GetComponent<LineRenderer>();
+
         _lineRenderer.positionCount = _numOfRopeSegments;
 
         Vector2 startPoint = transform.position;
@@ -59,7 +60,6 @@ public class RopeVerlet : MonoBehaviour
 
         for (int i = 0; i < _numOfConstraintRuns; i++)
         {
-            // Collision BEFORE constraints works better
             if (i % _collisionSegmentInterval == 0)
             {
                 HandleCollisions();
@@ -71,17 +71,19 @@ public class RopeVerlet : MonoBehaviour
 
     private void Simulate()
     {
-        // Skip first segment because it is pinned to mouse
-        for (int i = 1; i < _ropeSegments.Count; i++)
+        // Skip first and last segment because they are pinned to cat and point
+        for (int i = 1; i < _ropeSegments.Count - 1; i++)
         {
             RopeSegment segment = _ropeSegments[i];
 
             Vector2 velocity =
-                (segment.CurrentPosition - segment.OldPosition) * _dampingFactor;
+                (segment.CurrentPosition - segment.OldPosition) *
+                _dampingFactor;
 
             segment.OldPosition = segment.CurrentPosition;
 
             segment.CurrentPosition += velocity;
+
             segment.CurrentPosition +=
                 _gravityForce * Time.fixedDeltaTime;
 
@@ -91,45 +93,74 @@ public class RopeVerlet : MonoBehaviour
 
     private void ApplyConstraints()
     {
-        // Pin first segment to mouse
-        RopeSegment firstSegment = _ropeSegments[0];
+        // Pin first
+        if (_startAnchor != null)
+        {
+            RopeSegment firstSegment = _ropeSegments[0];
 
-        Vector3 mouseWorld =
-            _mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            firstSegment.CurrentPosition =
+                _startAnchor.position;
 
-        firstSegment.CurrentPosition =
-            new Vector2(mouseWorld.x, mouseWorld.y);
+            _ropeSegments[0] = firstSegment;
+        }
 
-        _ropeSegments[0] = firstSegment;
+        // Pin last 
+        if (_endAnchor != null)
+        {
+            int lastIndex = _ropeSegments.Count - 1;
 
-        // Distance constraints
+            RopeSegment lastSegment =
+                _ropeSegments[lastIndex];
+
+            lastSegment.CurrentPosition =
+                _endAnchor.position;
+
+            _ropeSegments[lastIndex] = lastSegment;
+        }
+
+        // make it work like rubber ish
         for (int i = 0; i < _ropeSegments.Count - 1; i++)
         {
             RopeSegment currentSeg = _ropeSegments[i];
             RopeSegment nextSeg = _ropeSegments[i + 1];
 
             Vector2 delta =
-                nextSeg.CurrentPosition - currentSeg.CurrentPosition;
+                nextSeg.CurrentPosition -
+                currentSeg.CurrentPosition;
 
             float distance = delta.magnitude;
 
-            float error = distance - _ropeSegmentLength;
+            float error =
+                distance - _ropeSegmentLength;
 
             if (distance > 0.0001f)
             {
-                Vector2 changeDir = delta / distance;
+                Vector2 changeDir =
+                    delta / distance;
 
-                Vector2 changeAmount = changeDir * error;
+                Vector2 changeAmount =
+                    changeDir * error;
 
+                // First point pinned
                 if (i == 0)
                 {
-                    // first segment pinned
-                    nextSeg.CurrentPosition -= changeAmount;
+                    nextSeg.CurrentPosition -=
+                        changeAmount;
                 }
+                // Last point pinned
+                else if (i == _ropeSegments.Count - 2)
+                {
+                    currentSeg.CurrentPosition +=
+                        changeAmount;
+                }
+                // rest of the rope
                 else
                 {
-                    currentSeg.CurrentPosition += changeAmount * 0.5f;
-                    nextSeg.CurrentPosition -= changeAmount * 0.5f;
+                    currentSeg.CurrentPosition +=
+                        changeAmount * 0.5f;
+
+                    nextSeg.CurrentPosition -=
+                        changeAmount * 0.5f;
                 }
 
                 _ropeSegments[i] = currentSeg;
@@ -140,12 +171,13 @@ public class RopeVerlet : MonoBehaviour
 
     private void HandleCollisions()
     {
-        for (int i = 1; i < _ropeSegments.Count; i++)
+        for (int i = 1; i < _ropeSegments.Count - 1; i++)
         {
             RopeSegment segment = _ropeSegments[i];
 
             Vector2 velocity =
-                segment.CurrentPosition - segment.OldPosition;
+                segment.CurrentPosition -
+                segment.OldPosition;
 
             Collider2D[] colliders =
                 Physics2D.OverlapCircleAll(
@@ -157,24 +189,28 @@ public class RopeVerlet : MonoBehaviour
             foreach (Collider2D collider in colliders)
             {
                 Vector2 closestPoint =
-                    collider.ClosestPoint(segment.CurrentPosition);
+                    collider.ClosestPoint(
+                        segment.CurrentPosition
+                    );
 
                 Vector2 collisionVector =
-                    segment.CurrentPosition - closestPoint;
+                    segment.CurrentPosition -
+                    closestPoint;
 
-                float distance = collisionVector.magnitude;
+                float distance =
+                    collisionVector.magnitude;
 
-                // Prevent divide by zero
                 if (distance == 0f)
                 {
                     collisionVector =
-                        (segment.CurrentPosition -
-                         (Vector2)collider.transform.position).normalized;
+                        (
+                            segment.CurrentPosition -
+                            (Vector2)collider.transform.position
+                        ).normalized;
 
                     distance = 0.0001f;
                 }
 
-                // Resolve overlap
                 if (distance < _collisionRadius)
                 {
                     Vector2 normal =
@@ -186,10 +222,11 @@ public class RopeVerlet : MonoBehaviour
                     segment.CurrentPosition +=
                         normal * penetration;
 
-                    // Optional bounce
                     velocity =
-                        Vector2.Reflect(velocity, normal) *
-                        _bounceFactor;
+                        Vector2.Reflect(
+                            velocity,
+                            normal
+                        ) * _bounceFactor;
                 }
             }
 
@@ -207,14 +244,16 @@ public class RopeVerlet : MonoBehaviour
 
         for (int i = 0; i < _ropeSegments.Count; i++)
         {
-            positions[i] = _ropeSegments[i].CurrentPosition;
+            positions[i] =
+                _ropeSegments[i].CurrentPosition;
         }
 
-        _lineRenderer.positionCount = positions.Length;
+        _lineRenderer.positionCount =
+            positions.Length;
+
         _lineRenderer.SetPositions(positions);
     }
 
-    // Debug collision circles
     private void OnDrawGizmos()
     {
         if (_ropeSegments == null)
