@@ -2513,6 +2513,16 @@ ScriptedImporter:
   resliceFromLayer: 0
   pSDLayerImportSetting: []
   psdLayers:
+  - name: Folder 4
+    spriteName: Folder 4
+    isGroup: 0
+    parentIndex: -1
+    spriteID: ff991da3dbc673a47a2bcc9406d1f354
+    layerID: 1668759826
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
   - name: hat
     spriteName: hat
     isGroup: 0
@@ -2530,16 +2540,6 @@ ScriptedImporter:
     spriteID: db0546bf72f90f84186183a79dad2533
     layerID: -158745408
     mosaicPosition: {x: 0, y: 185}
-    flatten: 0
-    isImported: 1
-    isVisible: 1
-  - name: Folder 4
-    spriteName: Folder 4
-    isGroup: 0
-    parentIndex: -1
-    spriteID: ff991da3dbc673a47a2bcc9406d1f354
-    layerID: 1668759826
-    mosaicPosition: {x: 0, y: 0}
     flatten: 0
     isImported: 1
     isVisible: 1
