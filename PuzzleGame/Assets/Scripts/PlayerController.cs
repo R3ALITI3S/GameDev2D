@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -62,7 +60,8 @@ public class PlayerController : MonoBehaviour
         if (groundCheck == null) return;
 
 
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + Vector2.down * 0.5f, groundCheckRadius, groundLayer
+);
 
 
         rb.linearVelocity = new Vector2(
