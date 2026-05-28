@@ -1,284 +1,110 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(LineRenderer))]
-public class RopeVerlet : MonoBehaviour
+public class YarnRope2D : MonoBehaviour
 {
-    [Header("Anchors")]
-    [SerializeField] private Transform _startAnchor; // Cat
-    [SerializeField] private Transform _endAnchor;   // Fixed the point
+    [Header("References")]
+    public Transform anchorPoint;
+    public Rigidbody2D catBody;
+    public GameObject ropeSegmentPrefab;
 
-    [Header("Rope")]
-    [SerializeField] private int _numOfRopeSegments = 50;
-    [SerializeField] private float _ropeSegmentLength = 0.225f;
+    [Header("Rope Settings")]
+    public int segmentCount = 12;
+    public float segmentLength = 0.25f;
+    public float ropeGravityScale = 1f;
 
-    [Header("Physics")]
-    [SerializeField] private Vector2 _gravityForce = new Vector2(0f, -9.81f);
-    [SerializeField] private float _dampingFactor = 0.98f;
+    [Header("Physics Tuning")]
+    public float linearDrag = 0.6f;
+    public float angularDrag = 1.2f;
 
-    [Header("Collision")]
-    [SerializeField] private LayerMask _collisionMask;
-    [SerializeField] private float _collisionRadius = 0.25f;
-    [SerializeField] private float _bounceFactor = 0.0f;
+    [Header("Spring Settings (First Joint)")]
+    public float springFrequency = 6f;
+    public float springDamping = 0.7f;
 
-    [Header("Constraints")]
-    [SerializeField] private int _numOfConstraintRuns = 50;
+    [Header("Line Renderer")]
+    public LineRenderer line;
 
-    [Header("Optimization")]
-    [SerializeField] private int _collisionSegmentInterval = 2;
+    private List<Rigidbody2D> segments = new List<Rigidbody2D>();
 
-    private LineRenderer _lineRenderer;
-
-    private readonly List<RopeSegment> _ropeSegments = new();
-
-    private void Awake()
+    void Start()
     {
-        _lineRenderer = GetComponent<LineRenderer>();
-
-        _lineRenderer.positionCount = _numOfRopeSegments;
-
-        Vector2 startPoint = transform.position;
-
-        _ropeSegments.Clear();
-
-        for (int i = 0; i < _numOfRopeSegments; i++)
-        {
-            _ropeSegments.Add(new RopeSegment(startPoint));
-
-            startPoint.y -= _ropeSegmentLength;
-        }
+        BuildRope();
     }
 
-    private void Update()
+    void BuildRope()
     {
-        DrawRope();
-    }
+        segments.Clear();
 
-    private void FixedUpdate()
-    {
-        Simulate();
+        Rigidbody2D previous = anchorPoint.GetComponent<Rigidbody2D>();
 
-        for (int i = 0; i < _numOfConstraintRuns; i++)
+        Vector2 startPos = anchorPoint.position;
+
+        for (int i = 0; i < segmentCount; i++)
         {
-            if (i % _collisionSegmentInterval == 0)
+            GameObject seg = Instantiate(ropeSegmentPrefab);
+
+            // Proper spacing.........
+            seg.transform.position = startPos + Vector2.down * segmentLength * (i + 1);
+
+            Rigidbody2D rb = seg.GetComponent<Rigidbody2D>();
+
+            rb.gravityScale = ropeGravityScale;
+            rb.linearDamping = linearDrag;
+            rb.angularDamping = angularDrag;
+            rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+            rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+
+            segments.Add(rb);
+
+            // soft first spring
+            if (i == 0)
             {
-                HandleCollisions();
+                SpringJoint2D spring = seg.AddComponent<SpringJoint2D>();
+                spring.autoConfigureDistance = false;
+                spring.distance = segmentLength;
+
+                spring.frequency = springFrequency;
+                spring.dampingRatio = springDamping;
+
+                spring.enableCollision = true;
+                spring.connectedBody = previous;
+            }
+            else
+            {
+                DistanceJoint2D joint = seg.AddComponent<DistanceJoint2D>();
+                joint.autoConfigureDistance = false;
+                joint.distance = segmentLength;
+                joint.maxDistanceOnly = false;
+                joint.enableCollision = true;
+                joint.connectedBody = previous;
             }
 
-            ApplyConstraints();
+            previous = rb;
         }
+
+        // Attach cat 
+        SpringJoint2D catJoint = catBody.gameObject.AddComponent<SpringJoint2D>();
+        catJoint.autoConfigureDistance = false;
+        catJoint.distance = segmentLength;
+
+        catJoint.frequency = springFrequency;
+        catJoint.dampingRatio = springDamping;
+
+        catJoint.enableCollision = true;
+        catJoint.connectedBody = previous;
     }
 
-    private void Simulate()
+    void LateUpdate()
     {
-        // Skip first and last segment because they are pinned to cat and point
-        for (int i = 1; i < _ropeSegments.Count - 1; i++)
+        if (line == null || segments.Count == 0) return;
+
+        line.positionCount = segments.Count + 1;
+
+        line.SetPosition(0, anchorPoint.position);
+
+        for (int i = 0; i < segments.Count; i++)
         {
-            RopeSegment segment = _ropeSegments[i];
-
-            Vector2 velocity =
-                (segment.CurrentPosition - segment.OldPosition) *
-                _dampingFactor;
-
-            segment.OldPosition = segment.CurrentPosition;
-
-            segment.CurrentPosition += velocity;
-
-            segment.CurrentPosition +=
-                _gravityForce * Time.fixedDeltaTime;
-
-            _ropeSegments[i] = segment;
-        }
-    }
-
-    private void ApplyConstraints()
-    {
-        // Pin first
-        if (_startAnchor != null)
-        {
-            RopeSegment firstSegment = _ropeSegments[0];
-
-            firstSegment.CurrentPosition =
-                _startAnchor.position;
-
-            _ropeSegments[0] = firstSegment;
-        }
-
-        // Pin last 
-        if (_endAnchor != null)
-        {
-            int lastIndex = _ropeSegments.Count - 1;
-
-            RopeSegment lastSegment =
-                _ropeSegments[lastIndex];
-
-            lastSegment.CurrentPosition =
-                _endAnchor.position;
-
-            _ropeSegments[lastIndex] = lastSegment;
-        }
-
-        // make it work like rubber ish
-        for (int i = 0; i < _ropeSegments.Count - 1; i++)
-        {
-            RopeSegment currentSeg = _ropeSegments[i];
-            RopeSegment nextSeg = _ropeSegments[i + 1];
-
-            Vector2 delta =
-                nextSeg.CurrentPosition -
-                currentSeg.CurrentPosition;
-
-            float distance = delta.magnitude;
-
-            float error =
-                distance - _ropeSegmentLength;
-
-            if (distance > 0.0001f)
-            {
-                Vector2 changeDir =
-                    delta / distance;
-
-                Vector2 changeAmount =
-                    changeDir * error;
-
-                // First point pinned
-                if (i == 0)
-                {
-                    nextSeg.CurrentPosition -=
-                        changeAmount;
-                }
-                // Last point pinned
-                else if (i == _ropeSegments.Count - 2)
-                {
-                    currentSeg.CurrentPosition +=
-                        changeAmount;
-                }
-                // rest of the rope
-                else
-                {
-                    currentSeg.CurrentPosition +=
-                        changeAmount * 0.5f;
-
-                    nextSeg.CurrentPosition -=
-                        changeAmount * 0.5f;
-                }
-
-                _ropeSegments[i] = currentSeg;
-                _ropeSegments[i + 1] = nextSeg;
-            }
-        }
-    }
-
-    private void HandleCollisions()
-    {
-        for (int i = 1; i < _ropeSegments.Count - 1; i++)
-        {
-            RopeSegment segment = _ropeSegments[i];
-
-            Vector2 velocity =
-                segment.CurrentPosition -
-                segment.OldPosition;
-
-            Collider2D[] colliders =
-                Physics2D.OverlapCircleAll(
-                    segment.CurrentPosition,
-                    _collisionRadius,
-                    _collisionMask
-                );
-
-            foreach (Collider2D collider in colliders)
-            {
-                Vector2 closestPoint =
-                    collider.ClosestPoint(
-                        segment.CurrentPosition
-                    );
-
-                Vector2 collisionVector =
-                    segment.CurrentPosition -
-                    closestPoint;
-
-                float distance =
-                    collisionVector.magnitude;
-
-                if (distance == 0f)
-                {
-                    collisionVector =
-                        (
-                            segment.CurrentPosition -
-                            (Vector2)collider.transform.position
-                        ).normalized;
-
-                    distance = 0.0001f;
-                }
-
-                if (distance < _collisionRadius)
-                {
-                    Vector2 normal =
-                        collisionVector.normalized;
-
-                    float penetration =
-                        _collisionRadius - distance;
-
-                    segment.CurrentPosition +=
-                        normal * penetration;
-
-                    velocity =
-                        Vector2.Reflect(
-                            velocity,
-                            normal
-                        ) * _bounceFactor;
-                }
-            }
-
-            segment.OldPosition =
-                segment.CurrentPosition - velocity;
-
-            _ropeSegments[i] = segment;
-        }
-    }
-
-    private void DrawRope()
-    {
-        Vector3[] positions =
-            new Vector3[_ropeSegments.Count];
-
-        for (int i = 0; i < _ropeSegments.Count; i++)
-        {
-            positions[i] =
-                _ropeSegments[i].CurrentPosition;
-        }
-
-        _lineRenderer.positionCount =
-            positions.Length;
-
-        _lineRenderer.SetPositions(positions);
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (_ropeSegments == null)
-            return;
-
-        Gizmos.color = Color.red;
-
-        foreach (RopeSegment segment in _ropeSegments)
-        {
-            Gizmos.DrawWireSphere(
-                segment.CurrentPosition,
-                _collisionRadius
-            );
-        }
-    }
-
-    public struct RopeSegment
-    {
-        public Vector2 CurrentPosition;
-        public Vector2 OldPosition;
-
-        public RopeSegment(Vector2 position)
-        {
-            CurrentPosition = position;
-            OldPosition = position;
+            line.SetPosition(i + 1, segments[i].position);
         }
     }
 }

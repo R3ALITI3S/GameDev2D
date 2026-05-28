@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 7f176fb6826b3fb46a453c20851546f3
+guid: 201113eb063013b4a907c8499bc07408
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7094310146270864183
-    second: cattoidleyarn-Sheet_0
+      213: 5495399558512067008
+    second: cattowalk-Sheet-yarn_0
   - first:
-      213: -6965163183614479333
-    second: cattoidleyarn-Sheet_1
+      213: 7338474610306399078
+    second: cattowalk-Sheet-yarn_1
   - first:
-      213: -3103568562621523345
-    second: cattoidleyarn-Sheet_2
+      213: -330145357426962390
+    second: cattowalk-Sheet-yarn_2
   - first:
-      213: -9083600996029681767
-    second: cattoidleyarn-Sheet_3
+      213: 3120284721416370171
+    second: cattowalk-Sheet-yarn_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -135,13 +135,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cattoidleyarn-Sheet_0
+      name: cattowalk-Sheet-yarn_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 3
-        width: 58
-        height: 57
+        x: 3
+        y: 4
+        width: 56
+        height: 56
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9cc531d5282fb8d90800000000000000
-      internalID: -7094310146270864183
+      spriteID: 0c143f758c4934c40800000000000000
+      internalID: 5495399558512067008
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cattoidleyarn-Sheet_1
+      name: cattowalk-Sheet-yarn_1
       rect:
         serializedVersion: 2
-        x: 62
-        y: 3
-        width: 58
-        height: 57
+        x: 61
+        y: 2
+        width: 59
+        height: 58
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,14 +172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b14b70eccf4c65f90800000000000000
-      internalID: -6965163183614479333
+      spriteID: 66b3984f6cf77d560800000000000000
+      internalID: 7338474610306399078
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cattoidleyarn-Sheet_2
+      name: cattowalk-Sheet-yarn_2
       rect:
         serializedVersion: 2
         x: 121
@@ -194,14 +194,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f6adfd0f5d8ede4d0800000000000000
-      internalID: -3103568562621523345
+      spriteID: a20525eeb861b6bf0800000000000000
+      internalID: -330145357426962390
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cattoidleyarn-Sheet_3
+      name: cattowalk-Sheet-yarn_3
       rect:
         serializedVersion: 2
         x: 180
@@ -216,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 99f2446650190f180800000000000000
-      internalID: -9083600996029681767
+      spriteID: bf7f9121c6a7d4b20800000000000000
+      internalID: 3120284721416370171
       vertices: []
       indices: 
       edges: []
@@ -226,7 +226,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 09317e13f6cad9a48b8f04f566958d75
+    spriteID: 6381e53d3d5345b499102de7d41e5ac0
     internalID: 0
     vertices: []
     indices: 
@@ -236,10 +236,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      cattoidleyarn-Sheet_0: -7094310146270864183
-      cattoidleyarn-Sheet_1: -6965163183614479333
-      cattoidleyarn-Sheet_2: -3103568562621523345
-      cattoidleyarn-Sheet_3: -9083600996029681767
+      cattowalk-Sheet-yarn_0: 5495399558512067008
+      cattowalk-Sheet-yarn_1: 7338474610306399078
+      cattowalk-Sheet-yarn_2: -330145357426962390
+      cattowalk-Sheet-yarn_3: 3120284721416370171
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
