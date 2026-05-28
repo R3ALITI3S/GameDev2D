@@ -729,9 +729,9 @@ GameObject:
   - component: {fileID: 766353683}
   - component: {fileID: 766353682}
   - component: {fileID: 766353681}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: YarnPickup
-  m_TagString: Untagged
+  m_TagString: Yarn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1989,9 +1989,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 687665613613919978, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
+      propertyPath: yarn
+      value: 
+      objectReference: {fileID: 766353680}
+    - target: {fileID: 687665613613919978, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 2050738728}
+    - target: {fileID: 687665613613919978, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
+      propertyPath: uiPickupYarn
+      value: 
+      objectReference: {fileID: 981755831}
+    - target: {fileID: 687665613613919978, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
+      propertyPath: yarnLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 2038559159968218051, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.9262333
