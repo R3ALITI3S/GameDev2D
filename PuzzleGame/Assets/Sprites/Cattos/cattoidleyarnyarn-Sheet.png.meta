@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 3f153b29c9c5ed8499b8eb2a48667963
+guid: ded124b1ff151844fa2285206fd3c03a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3734883980394492378
-    second: cattoidle-Sheet_0
+      213: -7432944238187384348
+    second: cattoidleyarnyarn-Sheet_0
   - first:
-      213: 2085982293851763316
-    second: cattoidle-Sheet_1
+      213: 5811227579609305208
+    second: cattoidleyarnyarn-Sheet_1
   - first:
-      213: -351854676317340948
-    second: cattoidle-Sheet_2
+      213: 8516445548636797088
+    second: cattoidleyarnyarn-Sheet_2
   - first:
-      213: 4170855453779110936
-    second: cattoidle-Sheet_3
+      213: -1445374617146672415
+    second: cattoidleyarnyarn-Sheet_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -135,29 +135,29 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cattoidle-Sheet_0
+      name: cattoidleyarnyarn-Sheet_0
       rect:
         serializedVersion: 2
-        x: 3
+        x: 2
         y: 3
-        width: 56
+        width: 58
         height: 57
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ad1f5b02139f4d330800000000000000
-      internalID: 3734883980394492378
+      spriteID: 4e1fd87c890e8d890800000000000000
+      internalID: -7432944238187384348
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cattoidle-Sheet_1
+      name: cattoidleyarnyarn-Sheet_1
       rect:
         serializedVersion: 2
         x: 62
@@ -165,21 +165,21 @@ TextureImporter:
         width: 58
         height: 57
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 472f9c028d5e2fc10800000000000000
-      internalID: 2085982293851763316
+      spriteID: 870d097c1b0a5a050800000000000000
+      internalID: 5811227579609305208
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cattoidle-Sheet_2
+      name: cattoidleyarnyarn-Sheet_2
       rect:
         serializedVersion: 2
         x: 121
@@ -187,21 +187,21 @@ TextureImporter:
         width: 59
         height: 57
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cea7b8d3906fd1bf0800000000000000
-      internalID: -351854676317340948
+      spriteID: 0a8f37bba1e703670800000000000000
+      internalID: 8516445548636797088
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cattoidle-Sheet_3
+      name: cattoidleyarnyarn-Sheet_3
       rect:
         serializedVersion: 2
         x: 180
@@ -209,15 +209,15 @@ TextureImporter:
         width: 60
         height: 57
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 81c2104efead1e930800000000000000
-      internalID: 4170855453779110936
+      spriteID: 1ea3b91917ff0fbe0800000000000000
+      internalID: -1445374617146672415
       vertices: []
       indices: 
       edges: []
@@ -226,7 +226,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 175ff978ab755a94f94992bf29c27f1e
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -236,10 +236,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      cattoidle-Sheet_0: 3734883980394492378
-      cattoidle-Sheet_1: 2085982293851763316
-      cattoidle-Sheet_2: -351854676317340948
-      cattoidle-Sheet_3: 4170855453779110936
+      cattoidleyarnyarn-Sheet_0: -7432944238187384348
+      cattoidleyarnyarn-Sheet_1: 5811227579609305208
+      cattoidleyarnyarn-Sheet_2: 8516445548636797088
+      cattoidleyarnyarn-Sheet_3: -1445374617146672415
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
