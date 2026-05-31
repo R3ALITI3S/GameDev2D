@@ -11,12 +11,25 @@ public class Lever : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             leverBool = !leverBool;
+            Debug.Log(leverBool);
         }
     }
 
     private void Update()
     {
         if(SceneManager.GetActiveScene().name == "Lvl 4")
+        {
+            if (leverBool)
+            {
+                scratchingBoard.SetActive(true);
+            }
+            else
+            {
+                scratchingBoard.SetActive(false);
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name == "Lvl 5")
         {
             if (leverBool)
             {
