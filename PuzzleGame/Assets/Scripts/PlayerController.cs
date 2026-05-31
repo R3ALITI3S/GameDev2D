@@ -4,14 +4,6 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// i no wan dis vv
-public enum YarnState 
-{
-    NoYarn,
-    YarnStomach,
-    YarnBall
-}
-
 public class PlayerController : MonoBehaviour
 {
     public float speed;
@@ -24,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [Header("Refs")]
     public Rigidbody2D rb;
     public Transform groundCheck;
+    //public Animator anim;
     public GameObject yarn; // assigned when in range
 
     [Header("Pickup")]
@@ -37,12 +30,6 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController Instance;
 
-    //public Animator anim;
-    [Header("ANIMATIONS!")]
-    public YarnState yarnState = YarnState.YarnBall;
-
-    public Animator anim;
-
     void Awake()
     {
         Instance = this;
@@ -50,10 +37,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        SetYarnState(yarnState);
-
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponentInChildren<Animator>();
+        //anim = GetComponentInChildren<Animator>();
 
         // Ensure UI starts hidden
         if (uiPickupYarn != null)
@@ -78,12 +63,6 @@ public class PlayerController : MonoBehaviour
         if (moveInput.x != 0)
             transform.localScale = new Vector3(Mathf.Sign(moveInput.x), 1, 1);
 
-        if (anim != null)
-        {
-            anim.SetFloat("Speed", Mathf.Abs(moveInput.x));
-            anim.SetInteger("YarnState", (int)yarnState);
-        }
-
         // Show/hide pickup UI (driven by detection code)
         if (uiPickupYarn != null)
             uiPickupYarn.gameObject.SetActive(pickupYarn);
@@ -97,14 +76,13 @@ public class PlayerController : MonoBehaviour
             {
                 Destroy(yarn);
                 yarn = null;
-
-                SetYarnState(YarnState.YarnBall);
             }
             pickupYarn = false;
             if (uiPickupYarn != null)
                 uiPickupYarn.gameObject.SetActive(false);
         }
 
+        //anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
     }
 
     void FixedUpdate()
@@ -152,13 +130,5 @@ public class PlayerController : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
-    }
-
-    public void SetYarnState(YarnState state)
-    {
-        yarnState = state;
-
-        if (anim != null)
-            anim.SetInteger("YarnState", (int)state);
     }
 }
