@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
     {
         if (groundCheck == null) return;
 
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        isGrounded = Physics2D.OverlapCircle((Vector2)transform.position + Vector2.down * 0.5f, groundCheckRadius, groundLayer
 
         // Proximity-based detection around the player (robust and doesn't require triggers)
         Collider2D hit = Physics2D.OverlapCircle(transform.position, pickupRadius, yarnLayer);
