@@ -7,6 +7,8 @@ public class PauseCanvas : MonoBehaviour
     public Canvas pauseCanvas;
     public GameObject player;
 
+    [SerializeField] RectTransform fader; //Transition image
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -53,10 +55,32 @@ public class PauseCanvas : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        pauseCanvas.enabled = false;
+        fader.gameObject.SetActive(true);
+        LeanTween.scale(fader, Vector3.zero, 0f);
+        LeanTween.scale(fader, new Vector3(1, 1, 1), 0.5f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
+        {
+            Invoke("LoadMenu", 0.5f);
+        });
+    }
+
+    private void LoadMenu()
+    {
         SceneManager.LoadScene("MainMenu");
     }
 
     public void ReloadLevel()
+    {
+        pauseCanvas.enabled = false;
+        fader.gameObject.SetActive(true);
+        LeanTween.scale(fader, Vector3.zero, 0f);
+        LeanTween.scale(fader, new Vector3(1, 1, 1), 0.5f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
+        {
+            Invoke("LevelReloading", 0.5f);
+        });
+    }
+
+    private void LevelReloading()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
