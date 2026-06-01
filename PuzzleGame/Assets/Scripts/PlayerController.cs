@@ -72,14 +72,28 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // INPUT
+        // INPUT & ANIMATION DRIVEN TOGETHER AT THE KEYBOARD PRESS
         moveInput = Vector2.zero;
 
-        if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
-            moveInput.x = -1;
+        // Check if any movement keys are actively held down this frame
+        bool leftPressed = Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed;
+        bool rightPressed = Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed;
 
-        if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+        if (leftPressed)
+        {
+            moveInput.x = -1;
+            if (anim != null) anim.SetBool("isWalking", true);
+        }
+        else if (rightPressed)
+        {
             moveInput.x = 1;
+            if (anim != null) anim.SetBool("isWalking", true);
+        }
+        else
+        {
+            // No keys pressed → turn off animation instantly
+            if (anim != null) anim.SetBool("isWalking", false);
+        }
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
             TryJump();
@@ -117,9 +131,6 @@ public class PlayerController : MonoBehaviour
             if (uiPickupYarn != null)
                 uiPickupYarn.gameObject.SetActive(false);
         }
-
-        if (anim != null)
-            anim.SetBool("isWalking", moveInput.x != 0);
     }
 
     void FixedUpdate()
