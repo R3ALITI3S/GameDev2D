@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.U2D.Animation;
 
@@ -10,7 +8,8 @@ public class PlayerController : MonoBehaviour
     public float speed;
 
     [Header("Jump")]
-    public float groundCheckRadius = 0.1f;
+    public Vector2 boxCastSize = new Vector2(0.5f, 0.1f); 
+    public float raycastDistance = 0.1f;          
     public LayerMask groundLayer;
     public float jumpForce;
 
@@ -19,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public Animator anim;
     public GameObject yarn; // assigned when in range
+    public SpriteRenderer spriteRenderer;
 
     [Header("Sprite Libraries")]
     public SpriteLibrary spriteLibrary;
@@ -72,6 +72,12 @@ public class PlayerController : MonoBehaviour
             uiPickupYarn.gameObject.SetActive(false);
 
         UpdateVisualState();
+
+        originalScale = new Vector3(
+        Mathf.Abs(transform.localScale.x),
+        transform.localScale.y,
+        transform.localScale.z
+);
     }
 
     void Update()
@@ -91,11 +97,7 @@ public class PlayerController : MonoBehaviour
         // Flip the sprite (keeps original scale safe)
         if (moveX != 0)
         {
-            transform.localScale = new Vector3(
-                Mathf.Sign(moveX) * Mathf.Abs(originalScale.x),
-                originalScale.y,
-                originalScale.z
-            );
+            spriteRenderer.flipX = moveX < 0;
         }
 
         // Show/hide pickup UI (driven by detection code)
@@ -122,7 +124,7 @@ public class PlayerController : MonoBehaviour
                 uiPickupYarn.gameObject.SetActive(false);
         }
 
-        // ✅ PERFECT WALK ANIMATION (NO DELAY, NO DESYNC)
+        // walk no delay
         isWalking = Mathf.Abs(moveX) > 0.01f && isGrounded;
 
         if (anim != null)
@@ -133,18 +135,24 @@ public class PlayerController : MonoBehaviour
     {
         if (groundCheck == null) return;
 
-        isGrounded = Physics2D.OverlapCircle(
-            (Vector2)transform.position + Vector2.down * 0.5f,
-            groundCheckRadius,
+        // Performs a BoxCast downwards from the groundCheck position
+        RaycastHit2D hitGround = Physics2D.BoxCast(
+            groundCheck.position, 
+            boxCastSize, 
+            0f,                 // Box rotation angle
+            Vector2.down, 
+            raycastDistance, 
             groundLayer
         );
+        
+        isGrounded = hitGround.collider != null;
 
         // Proximity-based detection around the player (robust and doesn't require triggers)
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, pickupRadius, yarnLayer);
-        if (hit != null && hit.CompareTag("Yarn"))
+        Collider2D hitYarn = Physics2D.OverlapCircle(transform.position, pickupRadius, yarnLayer);
+        if (hitYarn != null && hitYarn.CompareTag("Yarn"))
         {
             pickupYarn = true;
-            yarn = hit.gameObject;
+            yarn = hitYarn.gameObject;
         }
         else
         {
@@ -207,7 +215,7 @@ public class PlayerController : MonoBehaviour
         SetCatState(CatState.Normal);
     }
 
-    // Optional: visualize the pickup radius in editor!
+    // Optional: visualize the pickup radius and BoxCast in editor!
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
@@ -215,8 +223,10 @@ public class PlayerController : MonoBehaviour
 
         if (groundCheck != null)
         {
+            // ✅ MODIFIED: Draws the target destination area of the BoxCast
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+            Vector3 centerPosition = groundCheck.position + (Vector3.down * raycastDistance);
+            Gizmos.DrawWireCube(centerPosition, new Vector3(boxCastSize.x, boxCastSize.y, 1f));
         }
     }
 }
