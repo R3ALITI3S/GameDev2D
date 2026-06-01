@@ -17,6 +17,11 @@ GameObject:
   - component: {fileID: 934952083430376940}
   - component: {fileID: 2419468596803734281}
   - component: {fileID: 7485594792177563960}
+  - component: {fileID: 2407155444722052593}
+  - component: {fileID: 8141509174814112005}
+  - component: {fileID: 7125255915525170825}
+  - component: {fileID: 1284751245454025117}
+  - component: {fileID: 576407608566408562}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -34,7 +39,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.96, y: -0.39, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 6.28, y: 6.28, z: 6.28}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6032474116062710856}
@@ -89,7 +94,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 12
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -7094310146270864183, guid: 7f176fb6826b3fb46a453c20851546f3, type: 3}
+  m_Sprite: {fileID: 3734883980394492378, guid: 3f153b29c9c5ed8499b8eb2a48667963, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -119,7 +124,12 @@ MonoBehaviour:
   jumpForce: 5
   rb: {fileID: 1519565896758094679}
   groundCheck: {fileID: 0}
+  anim: {fileID: 7125255915525170825}
   yarn: {fileID: 0}
+  spriteLibrary: {fileID: 1284751245454025117}
+  normalCat: {fileID: 7108339969198208228, guid: 3e606eed250714b43861b041c00e01f1, type: 3}
+  catWithYarnCanThrow: {fileID: 7108339969198208228, guid: c5190fe188eed0e4ba3136749059ac13, type: 3}
+  catWithYarnCannotThrow: {fileID: 7108339969198208228, guid: d1fa10c462c00a24791527d95fbfc984, type: 3}
   uiPickupYarn: {fileID: 0}
   pickupRadius: 0.6
   yarnLayer:
@@ -149,6 +159,7 @@ MonoBehaviour:
   shootForce: 10
   trajectoryPoints: 20
   trajectoryTimeStep: 0.1
+  player: {fileID: 687665613613919978}
 --- !u!50 &1519565896758094679
 Rigidbody2D:
   serializedVersion: 5
@@ -210,17 +221,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.04332018, y: -0.16328478}
+  m_Offset: {x: -0.029717922, y: -0.03672356}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.32, y: 2.28}
+    oldSize: {x: 0.56, y: 0.57}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.4065447, y: 1.7765992}
+  m_Size: {x: 0.5223775, y: 0.48968184}
   m_EdgeRadius: 0
 --- !u!120 &934952083430376940
 LineRenderer:
@@ -294,8 +305,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
-      key1: {r: 1, g: 0, b: 0, a: 1}
+      key0: {r: 0, g: 0, b: 0, a: 1}
+      key1: {r: 0, g: 0, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -348,9 +359,9 @@ DistanceJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 1.3024163, y: 1.9064372}
+  m_ConnectedAnchor: {x: 1.0068629, y: 3.9484432}
   m_AutoConfigureDistance: 1
-  m_Distance: 9.038869
+  m_Distance: 7.7157116
   m_MaxDistanceOnly: 0
 --- !u!114 &7485594792177563960
 MonoBehaviour:
@@ -367,6 +378,175 @@ MonoBehaviour:
   jumpForce: 5
   crawlSpeed: 3
   wallJumpX: 5
+--- !u!114 &2407155444722052593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5724585437436808840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4e5b4ac2e45144fa944eaf21946ee2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RandomSound
+  audioSource: {fileID: 8141509174814112005}
+  normalSounds:
+  - {fileID: 8300000, guid: f333a42c5475100499cd5f9341052cb2, type: 3}
+  - {fileID: 8300000, guid: d0d94a82f80fca148bc1b7b449536d4b, type: 3}
+  - {fileID: 8300000, guid: d8aac3460a570144b9f1acd4539d7479, type: 3}
+  - {fileID: 8300000, guid: aa61909bcd8855843bd0741108a7b41b, type: 3}
+  specialSound: {fileID: 8300000, guid: 7879aaec5eed91f46a13d4566956d9ad, type: 3}
+  specialChance: 0.1
+--- !u!82 &8141509174814112005
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5724585437436808840}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 2.002512
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!95 &7125255915525170825
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5724585437436808840}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d142903e8b672e54388bd98b3fb19126, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1284751245454025117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5724585437436808840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29cff538c195c249b69c6f2236de67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteLibrary
+  m_Library: []
+  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: 3e606eed250714b43861b041c00e01f1, type: 3}
+--- !u!114 &576407608566408562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5724585437436808840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteResolver
+  m_CategoryHash: 0.009161512
+  m_labelHash: 1.3971405e-28
+  m_SpriteKey: 0
+  m_SpriteHash: 163368403
 --- !u!1 &7882330250196382494
 GameObject:
   m_ObjectHideFlags: 0
