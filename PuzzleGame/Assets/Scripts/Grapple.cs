@@ -16,6 +16,9 @@ public class Grapple : MonoBehaviour
     public int trajectoryPoints = 30;
     public float trajectoryTimeStep = 0.1f;
 
+    [Header("Player Reference")]
+    public PlayerController player;
+
     private bool isGrappling;
     private Vector2 grapplePoint;
     private GameObject currentHook;
@@ -24,11 +27,13 @@ public class Grapple : MonoBehaviour
     {
         ropeLine.enabled = false;
         dj.enabled = false;
+
+        if (player == null)
+            player = GetComponent<PlayerController>();
     }
 
     void Update()
     {
-
         if (Input.GetMouseButton(0))
         {
             DrawTrajectory();
@@ -48,6 +53,7 @@ public class Grapple : MonoBehaviour
             ropeLine.SetPosition(0, transform.position);
             ropeLine.SetPosition(1, grapplePoint);
         }
+
         if (Input.GetMouseButtonDown(1) && isGrappling)
         {
             StopGrapple();
@@ -60,27 +66,45 @@ public class Grapple : MonoBehaviour
         {
             Destroy(currentHook);
         }
+
         Vector2 mousePos = GetMouseWorldPosition();
         Vector2 direction = (mousePos - (Vector2)firePoint.position).normalized;
+
         currentHook = Instantiate(hookPrefab, firePoint.position, Quaternion.identity);
+
         GrappleHook gh = currentHook.GetComponent<GrappleHook>();
         gh.Launch(direction, shootForce, this, grappleLayer);
+
+        // yarn cat 
+        if (player != null)
+        {
+            player.SetCannotThrow();
+        }
     }
 
     public void Attach(Vector2 point)
     {
         grapplePoint = point;
         isGrappling = true;
+
         ropeLine.enabled = true;
         dj.enabled = true;
         dj.connectedAnchor = point;
+
+        // CAN'T THROW WHILE GRAPPLING!!
+        if (player != null)
+        {
+            player.SetCannotThrow();
+        }
     }
 
     void StopGrapple()
     {
         isGrappling = false;
+
         ropeLine.enabled = false;
         dj.enabled = false;
+
         if (currentHook != null)
         {
             Destroy(currentHook);
@@ -90,9 +114,11 @@ public class Grapple : MonoBehaviour
     void DrawTrajectory()
     {
         trajectoryLine.enabled = true;
+
         Vector2 startPos = firePoint.position;
         Vector2 mousePos = GetMouseWorldPosition();
         Vector2 velocity = (mousePos - startPos).normalized * shootForce;
+
         trajectoryLine.positionCount = trajectoryPoints;
 
         for (int i = 0; i < trajectoryPoints; i++)
