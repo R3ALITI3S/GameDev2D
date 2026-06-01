@@ -1348,10 +1348,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3226800212699529205, guid: 5bedde74d1087c44fba257b77111d09a, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1747,6 +1743,10 @@ PrefabInstance:
     - target: {fileID: 3710905127313299121, guid: dc1926cd61d78e149aae58a8414d3c58, type: 3}
       propertyPath: m_Name
       value: Pushable object
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710905127313299121, guid: dc1926cd61d78e149aae58a8414d3c58, type: 3}
+      propertyPath: m_TagString
+      value: pushItem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
