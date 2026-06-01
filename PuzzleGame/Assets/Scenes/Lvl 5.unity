@@ -1502,6 +1502,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pushable object
       objectReference: {fileID: 0}
+    - target: {fileID: 3710905127313299121, guid: dc1926cd61d78e149aae58a8414d3c58, type: 3}
+      propertyPath: m_TagString
+      value: pushItem
+      objectReference: {fileID: 0}
     - target: {fileID: 7731082144184699705, guid: dc1926cd61d78e149aae58a8414d3c58, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -1897,6 +1901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lever
   scratchingBoard: {fileID: 598735492}
+  pivotRotation: {fileID: 0}
 --- !u!61 &1884279244
 BoxCollider2D:
   m_ObjectHideFlags: 0
