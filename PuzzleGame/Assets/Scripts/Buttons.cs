@@ -78,5 +78,17 @@ public class Buttons : MonoBehaviour
                 gate.SetActive(true);
             }
         }
+
+        if (SceneManager.GetActiveScene().name == "Lvl 6")
+        {
+            if (isPressed)
+            {
+                gate.SetActive(true);
+            }
+            else
+            {
+                gate.SetActive(false);
+            }
+        }
     }
 }

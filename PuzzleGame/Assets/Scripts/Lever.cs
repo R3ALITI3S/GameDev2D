@@ -4,14 +4,17 @@ using UnityEngine.SceneManagement;
 public class Lever : MonoBehaviour
 {
     private bool leverBool;
-    public GameObject scratchingBoard;
+    public GameObject obj;
+    public Transform pivotRotation;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             leverBool = !leverBool;
-            Debug.Log(leverBool);
+
+            float angle = leverBool ? 30f : -30f;
+            pivotRotation.rotation = Quaternion.Euler(0f, 0f, angle);
         }
     }
 
@@ -21,11 +24,11 @@ public class Lever : MonoBehaviour
         {
             if (leverBool)
             {
-                scratchingBoard.SetActive(true);
+                obj.SetActive(true);
             }
             else
             {
-                scratchingBoard.SetActive(false);
+                obj.SetActive(false);
             }
         }
 
@@ -33,11 +36,23 @@ public class Lever : MonoBehaviour
         {
             if (leverBool)
             {
-                scratchingBoard.SetActive(true);
+                obj.SetActive(true);
             }
             else
             {
-                scratchingBoard.SetActive(false);
+                obj.SetActive(false);
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name == "Lvl 6")
+        {
+            if (leverBool)
+            {
+                obj.SetActive(true);
+            }
+            else
+            {
+                obj.SetActive(false);
             }
         }
     }

@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -61,7 +59,11 @@ public class PlayerController : MonoBehaviour
 
         // Flip the sprite
         if (moveInput.x != 0)
-            transform.localScale = new Vector3(Mathf.Sign(moveInput.x), 1, 1);
+        {
+            Vector3 scale = transform.localScale;
+            scale.x = Mathf.Abs(scale.x) * Mathf.Sign(moveInput.x);
+            transform.localScale = scale;
+        }
 
         // Show/hide pickup UI (driven by detection code)
         if (uiPickupYarn != null)
