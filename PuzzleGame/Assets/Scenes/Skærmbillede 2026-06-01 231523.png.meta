@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 201113eb063013b4a907c8499bc07408
+guid: f9a98874d087f6d4bbb392898ade7132
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5495399558512067008
-    second: cattowalk-Sheet-yarn_0
-  - first:
-      213: 7338474610306399078
-    second: cattowalk-Sheet-yarn_1
-  - first:
-      213: -330145357426962390
-    second: cattowalk-Sheet-yarn_2
-  - first:
-      213: 3120284721416370171
-    second: cattowalk-Sheet-yarn_3
+      213: -6745078899719030670
+    second: "Sk\xE6rmbillede 2026-06-01 231523_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -135,89 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cattowalk-Sheet-yarn_0
+      name: "Sk\xE6rmbillede 2026-06-01 231523_0"
       rect:
         serializedVersion: 2
-        x: 3
-        y: 4
-        width: 56
-        height: 56
+        x: 0
+        y: 0
+        width: 797
+        height: 450
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0c143f758c4934c40800000000000000
-      internalID: 5495399558512067008
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cattowalk-Sheet-yarn_1
-      rect:
-        serializedVersion: 2
-        x: 61
-        y: 2
-        width: 59
-        height: 58
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 66b3984f6cf77d560800000000000000
-      internalID: 7338474610306399078
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cattowalk-Sheet-yarn_2
-      rect:
-        serializedVersion: 2
-        x: 121
-        y: 3
-        width: 59
-        height: 57
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a20525eeb861b6bf0800000000000000
-      internalID: -330145357426962390
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cattowalk-Sheet-yarn_3
-      rect:
-        serializedVersion: 2
-        x: 180
-        y: 3
-        width: 60
-        height: 57
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bf7f9121c6a7d4b20800000000000000
-      internalID: 3120284721416370171
+      spriteID: 278b3484a7aa462a0800000000000000
+      internalID: -6745078899719030670
       vertices: []
       indices: 
       edges: []
@@ -226,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6381e53d3d5345b499102de7d41e5ac0
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -236,10 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      cattowalk-Sheet-yarn_0: 5495399558512067008
-      cattowalk-Sheet-yarn_1: 7338474610306399078
-      cattowalk-Sheet-yarn_2: -330145357426962390
-      cattowalk-Sheet-yarn_3: 3120284721416370171
+      "Sk\xE6rmbillede 2026-06-01 231523_0": -6745078899719030670
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
