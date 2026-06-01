@@ -7,6 +7,15 @@ public class Buttons : MonoBehaviour
     public bool isPressed;
     int objectsOnButton = 0;
     public GameObject gate;
+    public Sprite buttonUp;
+    public Sprite buttonDown;
+    public SpriteRenderer sr;
+
+    private void Start()
+    {
+        sr = GetComponent<SpriteRenderer>();
+        sr.sprite = buttonUp;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -35,16 +44,30 @@ public class Buttons : MonoBehaviour
     void Press()
     {
         isPressed = true;
+        sr.sprite = buttonDown;
     }
 
     void Release()
     {
         isPressed = false;
+        sr.sprite = buttonUp;
     }
 
     private void Update()
     {
         if (SceneManager.GetActiveScene().name == "Lvl 4")
+        {
+            if (isPressed)
+            {
+                gate.SetActive(false);
+            }
+            else
+            {
+                gate.SetActive(true);
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name == "Lvl 5")
         {
             if (isPressed)
             {
