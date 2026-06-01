@@ -118,7 +118,7 @@ MonoBehaviour:
   groundCheckRadius: 1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4294967295
   jumpForce: 5
   rb: {fileID: 1519565896758094679}
   groundCheck: {fileID: 0}
@@ -157,7 +157,7 @@ MonoBehaviour:
   shootForce: 10
   trajectoryPoints: 20
   trajectoryTimeStep: 0.1
-  player: {fileID: 0}
+  player: {fileID: 687665613613919978}
 --- !u!50 &1519565896758094679
 Rigidbody2D:
   serializedVersion: 5
