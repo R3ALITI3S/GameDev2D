@@ -33,9 +33,13 @@ public class PlayerController : MonoBehaviour
     public LayerMask yarnLayer;                 // set to include the Yarn layer
 
     private Vector2 moveInput;
+    private float moveX; // ✅ FIX: cached movement input
+
     private bool isGrounded;
     private bool pickupYarn;
     private Vector3 originalScale;
+
+    private bool isWalking;
 
     public static PlayerController Instance;
 
@@ -72,37 +76,23 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // INPUT & ANIMATION DRIVEN TOGETHER AT THE KEYBOARD PRESS
-        moveInput = Vector2.zero;
+        // INPUT (cached properly)
+        moveX = 0f;
 
-        // Check if any movement keys are actively held down this frame
-        bool leftPressed = Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed;
-        bool rightPressed = Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed;
+        if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
+            moveX = -1f;
 
-        if (leftPressed)
-        {
-            moveInput.x = -1;
-            if (anim != null) anim.SetBool("isWalking", true);
-        }
-        else if (rightPressed)
-        {
-            moveInput.x = 1;
-            if (anim != null) anim.SetBool("isWalking", true);
-        }
-        else
-        {
-            // No keys pressed → turn off animation instantly
-            if (anim != null) anim.SetBool("isWalking", false);
-        }
+        if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+            moveX = 1f;
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
             TryJump();
 
         // Flip the sprite (keeps original scale safe)
-        if (moveInput.x != 0)
+        if (moveX != 0)
         {
             transform.localScale = new Vector3(
-                Mathf.Sign(moveInput.x) * Mathf.Abs(originalScale.x),
+                Mathf.Sign(moveX) * Mathf.Abs(originalScale.x),
                 originalScale.y,
                 originalScale.z
             );
@@ -131,6 +121,12 @@ public class PlayerController : MonoBehaviour
             if (uiPickupYarn != null)
                 uiPickupYarn.gameObject.SetActive(false);
         }
+
+        // ✅ PERFECT WALK ANIMATION (NO DELAY, NO DESYNC)
+        isWalking = Mathf.Abs(moveX) > 0.01f && isGrounded;
+
+        if (anim != null)
+            anim.SetBool("isWalking", isWalking);
     }
 
     void FixedUpdate()
@@ -156,8 +152,9 @@ public class PlayerController : MonoBehaviour
             yarn = null;
         }
 
+        // Movement (uses cached input → stable physics)
         rb.linearVelocity = new Vector2(
-            moveInput.x * speed,
+            moveX * speed,
             rb.linearVelocity.y
         );
     }
