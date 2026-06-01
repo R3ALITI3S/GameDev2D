@@ -1,15 +1,23 @@
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class Buttons : MonoBehaviour
 {
     public bool isPressed;
     int objectsOnButton = 0;
+    public Transform pivotRotationLvl3;
     public GameObject gate;
     public Sprite buttonUp;
     public Sprite buttonDown;
     public SpriteRenderer sr;
+
+    // Smooth rotation settings
+    public float rotationSpeed = 180f; // degrees per second
+    public float pressedZ = 90f;
+    public float defaultZ = 0f;
 
     private void Start()
     {
@@ -19,26 +27,34 @@ public class Buttons : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.attachedRigidbody != null)
+        if (collision.CompareTag("pushItem"))
         {
-            objectsOnButton++;
-            if (!isPressed)
-            {
-                Press();
-            }
+            if (collision.attachedRigidbody != null)
+                    {
+                        objectsOnButton++;
+                        if (!isPressed)
+                        {
+                            Press();
+                        }
+                    }
         }
+            
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.attachedRigidbody != null)
+        if (collision.CompareTag("pushItem"))
         {
-            objectsOnButton--;
-            if (objectsOnButton <= 0)
-            {
-                Release();
-            }
+            if (collision.attachedRigidbody != null)
+                {
+                    objectsOnButton--;
+                    if (objectsOnButton <= 0)
+                        {
+                            Release();
+                        }
+                }
         }
+            
     }
 
     void Press()
@@ -55,6 +71,22 @@ public class Buttons : MonoBehaviour
 
     private void Update()
     {
+        if (SceneManager.GetActiveScene().name == "Lvl 3")
+        {
+            if (pivotRotationLvl3 != null)
+            {
+                Quaternion target = isPressed
+                    ? Quaternion.Euler(0f, 0f, pressedZ)
+                    : Quaternion.Euler(0f, 0f, defaultZ);
+
+                // Smoothly rotate toward target over time
+                pivotRotationLvl3.rotation = Quaternion.RotateTowards(
+                    pivotRotationLvl3.rotation,
+                    target,
+                    rotationSpeed * Time.deltaTime);
+            }
+        }
+
         if (SceneManager.GetActiveScene().name == "Lvl 4")
         {
             if (isPressed)

@@ -55,6 +55,26 @@ public class CanvasManager : MonoBehaviour
         });
     }
 
+    public void GoToLvl4()
+    {
+        fader.gameObject.SetActive(true);
+        LeanTween.scale(fader, Vector3.zero, 0f);
+        LeanTween.scale(fader, new Vector3(1, 1, 1), 0.5f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
+        {
+            Invoke("LoadLvl4", 0.5f);
+        });
+    }
+
+    public void GoToLvl5()
+    {
+        fader.gameObject.SetActive(true);
+        LeanTween.scale(fader, Vector3.zero, 0f);
+        LeanTween.scale(fader, new Vector3(1, 1, 1), 0.5f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
+        {
+            Invoke("LoadLvl5", 0.5f);
+        });
+    }
+
     private void LoadMenu()
     {
         SceneManager.LoadScene("MainMenu");
@@ -73,5 +93,15 @@ public class CanvasManager : MonoBehaviour
     private void LoadLvl3()
     {
         SceneManager.LoadScene("Lvl 3");
+    }
+
+    private void LoadLvl4()
+    {
+        SceneManager.LoadScene("Lvl 4");
+    }
+
+    private void LoadLvl5()
+    {
+        SceneManager.LoadScene("Lvl 5");
     }
 }
