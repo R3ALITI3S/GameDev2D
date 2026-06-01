@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
                 uiPickupYarn.gameObject.SetActive(false);
         }
 
-        // ✅ PERFECT WALK ANIMATION (NO DELAY, NO DESYNC)
+        // walk no delay
         isWalking = Mathf.Abs(moveX) > 0.01f && isGrounded;
 
         if (anim != null)
@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
     {
         if (groundCheck == null) return;
 
-        // ✅ MODIFIED: Performs a BoxCast downwards from the groundCheck position
+        // Performs a BoxCast downwards from the groundCheck position
         RaycastHit2D hitGround = Physics2D.BoxCast(
             groundCheck.position, 
             boxCastSize, 
