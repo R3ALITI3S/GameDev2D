@@ -1963,6 +1963,10 @@ PrefabInstance:
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 1693439650}
+    - target: {fileID: 2617195887639670079, guid: c523b3d64657d1c46ab48b738ca9be2b, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 3572299196223682582, guid: c523b3d64657d1c46ab48b738ca9be2b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.96
