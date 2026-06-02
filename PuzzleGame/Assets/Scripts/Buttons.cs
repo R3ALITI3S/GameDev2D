@@ -1,8 +1,5 @@
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public class Buttons : MonoBehaviour
 {
@@ -13,6 +10,7 @@ public class Buttons : MonoBehaviour
     public Sprite buttonUp;
     public Sprite buttonDown;
     public SpriteRenderer sr;
+    public MovingPlatform movingPlatform;
 
     // Smooth rotation settings
     public float rotationSpeed = 180f; // degrees per second
@@ -27,34 +25,28 @@ public class Buttons : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("pushItem"))
+        if (collision.attachedRigidbody != null)
         {
-            if (collision.attachedRigidbody != null)
-                    {
-                        objectsOnButton++;
-                        if (!isPressed)
-                        {
-                            Press();
-                        }
-                    }
+            objectsOnButton++;
+            if (!isPressed)
+            {
+                Press();
+            }
         }
-            
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("pushItem"))
+
+        if (collision.attachedRigidbody != null)
         {
-            if (collision.attachedRigidbody != null)
-                {
-                    objectsOnButton--;
-                    if (objectsOnButton <= 0)
-                        {
-                            Release();
-                        }
-                }
+            objectsOnButton--;
+            if (objectsOnButton <= 0)
+            {
+                Release();
+            }
         }
-            
     }
 
     void Press()
@@ -91,11 +83,11 @@ public class Buttons : MonoBehaviour
         {
             if (isPressed)
             {
-                gate.SetActive(false);
+                movingPlatform.enabled = true;
             }
             else
             {
-                gate.SetActive(true);
+                movingPlatform.enabled = false;
             }
         }
 

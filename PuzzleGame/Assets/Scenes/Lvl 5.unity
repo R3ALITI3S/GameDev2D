@@ -695,6 +695,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5038456330930837607, guid: c236b728831419e499d9eedd1d3b7d3a, type: 3}
+      propertyPath: obj
+      value: 
+      objectReference: {fileID: 598735492}
+    - target: {fileID: 5038456330930837607, guid: c236b728831419e499d9eedd1d3b7d3a, type: 3}
       propertyPath: scratchingBoard
       value: 
       objectReference: {fileID: 598735492}
