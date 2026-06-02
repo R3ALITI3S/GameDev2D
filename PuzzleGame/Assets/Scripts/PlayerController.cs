@@ -242,7 +242,7 @@ public class PlayerController : MonoBehaviour
         Vector3 spawnPos = transform.position + new Vector3(dropOffset.x * dir, dropOffset.y, dropOffset.z);
 
         GameObject spawned = Instantiate(yarnPrefab, spawnPos, Quaternion.identity);
-        // Ensure spawned has the Yarn tag/layer set on the prefab itself. We don't set it here to avoid overriding prefab settings.
+        spawned.tag = "Yarn";
 
         // Return the cat's visual state to normal
         ReturnToNormal();
