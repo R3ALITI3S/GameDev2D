@@ -1902,7 +1902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4053543284345517106, guid: 774edf2556a404349b3381f0c78a25fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.19
+      value: 9.83
       objectReference: {fileID: 0}
     - target: {fileID: 4053543284345517106, guid: 774edf2556a404349b3381f0c78a25fa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2350,6 +2350,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8080741629218274863, guid: db4fedfe70b7120468ae0662649297c8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8418293877648012885, guid: db4fedfe70b7120468ae0662649297c8, type: 3}
       propertyPath: m_Name
       value: shelf
@@ -3440,7 +3444,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1223036487492615265, guid: 1005d9b1f8ba93246b2a5d11d1c2fa41, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.17
+      value: 7.07
       objectReference: {fileID: 0}
     - target: {fileID: 1223036487492615265, guid: 1005d9b1f8ba93246b2a5d11d1c2fa41, type: 3}
       propertyPath: m_LocalPosition.y
