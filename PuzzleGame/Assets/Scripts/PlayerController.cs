@@ -20,6 +20,10 @@ public class PlayerController : MonoBehaviour
     public GameObject yarn; // assigned when in range
     public SpriteRenderer spriteRenderer;
 
+    // Prefab used when dropping/equipping yarn
+    public GameObject yarnPrefab;
+    public Vector3 dropOffset = new Vector3(0.5f, 0f, 0f);
+
     [Header("Sprite Libraries")]
     public SpriteLibrary spriteLibrary;
 
@@ -124,6 +128,13 @@ public class PlayerController : MonoBehaviour
                 uiPickupYarn.gameObject.SetActive(false);
         }
 
+        // Drop equipped yarn (press E)
+        bool dropPressed = (Keyboard.current.eKey != null && Keyboard.current.eKey.wasPressedThisFrame);
+        if ((currentState == CatState.YarnCanThrow || currentState == CatState.YarnCannotThrow) && dropPressed)
+        {
+            DropYarn();
+        }
+
         // walk no delay
         isWalking = Mathf.Abs(moveX) > 0.01f && isGrounded;
 
@@ -213,6 +224,22 @@ public class PlayerController : MonoBehaviour
     public void ReturnToNormal()
     {
         SetCatState(CatState.Normal);
+    }
+
+    // Instantiate the yarn prefab at the player's position (in front) and return to normal state
+    public void DropYarn()
+    {
+        if (yarnPrefab == null) return;
+
+        // Drop in front of the player, use flipX to determine direction
+        float dir = spriteRenderer != null && spriteRenderer.flipX ? -1f : 1f;
+        Vector3 spawnPos = transform.position + new Vector3(dropOffset.x * dir, dropOffset.y, dropOffset.z);
+
+        GameObject spawned = Instantiate(yarnPrefab, spawnPos, Quaternion.identity);
+        // Ensure spawned has the Yarn tag/layer set on the prefab itself. We don't set it here to avoid overriding prefab settings.
+
+        // Return the cat's visual state to normal
+        ReturnToNormal();
     }
 
     // Optional: visualize the pickup radius and BoxCast in editor!

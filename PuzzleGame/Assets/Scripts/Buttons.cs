@@ -11,6 +11,7 @@ public class Buttons : MonoBehaviour
     public Sprite buttonDown;
     public SpriteRenderer sr;
     public MovingPlatform movingPlatform;
+    public GameObject obstacleLvl11;
 
     // Smooth rotation settings
     public float rotationSpeed = 180f; // degrees per second
@@ -112,6 +113,29 @@ public class Buttons : MonoBehaviour
             else
             {
                 gate.SetActive(false);
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name == "Lvl 11" && gate != null)
+        {
+            if (isPressed && gate != null)
+            {
+                gate.SetActive(false);
+            }
+            else
+            {
+                gate.SetActive(true);
+            }
+        }
+        if (SceneManager.GetActiveScene().name == "Lvl 11" && obstacleLvl11 != null)
+        {
+            if (isPressed && obstacleLvl11 != null)
+            {
+                obstacleLvl11.SetActive(false);
+            }
+            else
+            {
+                obstacleLvl11.SetActive(true);
             }
         }
     }

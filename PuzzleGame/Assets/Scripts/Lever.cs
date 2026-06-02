@@ -6,6 +6,7 @@ public class Lever : MonoBehaviour
     private bool leverBool;
     public GameObject obj;
     public Transform pivotRotation;
+    public MovingPlatform movingPlatform;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -36,11 +37,11 @@ public class Lever : MonoBehaviour
         {
             if (leverBool)
             {
-                obj.SetActive(true);
+                movingPlatform.enabled = true;
             }
             else
             {
-                obj.SetActive(false);
+                movingPlatform.enabled = false;
             }
         }
 
@@ -53,6 +54,18 @@ public class Lever : MonoBehaviour
             else
             {
                 obj.SetActive(false);
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name == "Lvl 11")
+        {
+            if (leverBool)
+            {
+                obj.SetActive(false);
+            }
+            else
+            {
+                obj.SetActive(true);
             }
         }
     }
