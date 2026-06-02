@@ -226,6 +226,12 @@ public class PlayerController : MonoBehaviour
         SetCatState(CatState.Normal);
     }
 
+    // Returns true when the player currently has yarn equipped (whether throwable or not)
+    public bool IsYarnEquipped()
+    {
+        return currentState == CatState.YarnCanThrow || currentState == CatState.YarnCannotThrow;
+    }
+
     // Instantiate the yarn prefab at the player's position (in front) and return to normal state
     public void DropYarn()
     {

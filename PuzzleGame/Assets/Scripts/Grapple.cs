@@ -62,6 +62,10 @@ public class Grapple : MonoBehaviour
 
     void ShootHook()
     {
+        // Block shooting if the player does not have yarn equipped
+        if (player != null && !player.IsYarnEquipped())
+            return;
+
         if (currentHook != null)
         {
             Destroy(currentHook);
