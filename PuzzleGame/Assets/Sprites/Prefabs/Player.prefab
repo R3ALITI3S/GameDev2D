@@ -123,7 +123,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  jumpForce: 5
+  jumpForce: 7
   rb: {fileID: 1519565896758094679}
   groundCheck: {fileID: 7241621297765195862}
   anim: {fileID: 7125255915525170825}
@@ -364,7 +364,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 1.0068629, y: 3.9484432}
   m_AutoConfigureDistance: 1
-  m_Distance: 7.7157116
+  m_Distance: 9.679351
   m_MaxDistanceOnly: 0
 --- !u!114 &7485594792177563960
 MonoBehaviour:
