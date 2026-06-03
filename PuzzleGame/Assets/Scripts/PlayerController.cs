@@ -111,10 +111,10 @@ public class PlayerController : MonoBehaviour
             uiPickupYarn.gameObject.SetActive(pickupYarn);
 
         timer += Time.deltaTime;
-        Debug.Log("Timer: " + timer);
+        // Debug.Log("Timer: " + timer);
 
         // Pick up yarn
-        bool enterPressed = (Keyboard.current.enterKey != null && Keyboard.current.enterKey.wasPressedThisFrame);
+        bool enterPressed = (Keyboard.current.eKey != null && Keyboard.current.eKey.wasPressedThisFrame);
 
         if (pickupYarn && enterPressed)
         {
@@ -135,8 +135,10 @@ public class PlayerController : MonoBehaviour
                 uiPickupYarn.gameObject.SetActive(false);
         }
 
+        
+
         // Drop equipped yarn (press Enter)
-        bool dropPressed = (Keyboard.current.enterKey != null && Keyboard.current.enterKey.wasPressedThisFrame);
+        bool dropPressed = (Keyboard.current.eKey != null && Keyboard.current.eKey.wasPressedThisFrame);
         if ((currentState == CatState.YarnCanThrow || currentState == CatState.YarnCannotThrow) && dropPressed)
         {
             if (timer >= 0.5f)
