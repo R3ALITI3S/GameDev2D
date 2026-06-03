@@ -2463,7 +2463,7 @@ PrefabInstance:
     - target: {fileID: 687665613613919978, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
       propertyPath: groundCheck
       value: 
-      objectReference: {fileID: 1651339843}
+      objectReference: {fileID: 1639585355}
     - target: {fileID: 687665613613919978, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
       propertyPath: uiPickupYarn
       value: 
@@ -2527,10 +2527,10 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1470638098}
   m_SourcePrefab: {fileID: 100100000, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
---- !u!4 &1651339843 stripped
+--- !u!4 &1639585355 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8938141501143666208, guid: 2ffe1f2adce30fc459d083b4295e1513, type: 3}
-  m_PrefabInstance: {fileID: 7339871028562770039}
+  m_CorrespondingSourceObject: {fileID: 7241621297765195862, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
+  m_PrefabInstance: {fileID: 1639585354}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1689469557
 GameObject:

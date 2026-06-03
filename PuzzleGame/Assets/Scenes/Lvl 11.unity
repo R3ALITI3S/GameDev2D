@@ -635,21 +635,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 338441975017530421, guid: 904f35cea1ad0e242a20b0f2bde13c53, type: 3}
-      propertyPath: fader
-      value: 
-      objectReference: {fileID: 684764130}
     - target: {fileID: 4890079468096238414, guid: 904f35cea1ad0e242a20b0f2bde13c53, type: 3}
       propertyPath: m_Name
       value: CanvasManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7435322555041128765, guid: 904f35cea1ad0e242a20b0f2bde13c53, type: 3}
+      propertyPath: fader
+      value: 
+      objectReference: {fileID: 684764130}
+    - target: {fileID: 7435322555041128765, guid: 904f35cea1ad0e242a20b0f2bde13c53, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 774966542}
+    - target: {fileID: 7435322555041128765, guid: 904f35cea1ad0e242a20b0f2bde13c53, type: 3}
+      propertyPath: pauseCanvas
+      value: 
+      objectReference: {fileID: 236591414}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4890079468096238414, guid: 904f35cea1ad0e242a20b0f2bde13c53, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2018736710}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 904f35cea1ad0e242a20b0f2bde13c53, type: 3}
 --- !u!223 &236591414 stripped
 Canvas:
@@ -1633,6 +1638,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4274663025120470603, guid: c5519c5f393f3604b92713deeb45e638, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274663025120470603, guid: c5519c5f393f3604b92713deeb45e638, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274663025120470603, guid: c5519c5f393f3604b92713deeb45e638, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274663025120470603, guid: c5519c5f393f3604b92713deeb45e638, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1924,6 +1941,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &667710204 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7435322555041128765, guid: 904f35cea1ad0e242a20b0f2bde13c53, type: 3}
+  m_PrefabInstance: {fileID: 222009910}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21d26c80921ec174eaefbc8489cb1822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseCanvas
 --- !u!1 &679669842
 GameObject:
   m_ObjectHideFlags: 0
@@ -2700,6 +2728,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!4 &1019288790 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7241621297765195862, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
+  m_PrefabInstance: {fileID: 1635039918011528654}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1119869949 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8106691866318434106, guid: fc2416ce9c998964680f25a1a6784bf3, type: 3}
@@ -3127,11 +3160,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9e1cc86124e65144aeb80eaa1dd41e4, type: 3}
---- !u!4 &1281429476 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9058084329414950029, guid: db4fedfe70b7120468ae0662649297c8, type: 3}
-  m_PrefabInstance: {fileID: 259894089}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1381865639
 GameObject:
   m_ObjectHideFlags: 0
@@ -3774,7 +3802,7 @@ PrefabInstance:
     - target: {fileID: 128649894668701621, guid: 0aedacd4e56c3994e9359556194043ad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2018736710}
+      objectReference: {fileID: 667710204}
     - target: {fileID: 128649894668701621, guid: 0aedacd4e56c3994e9359556194043ad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ResumeGame
@@ -3862,7 +3890,7 @@ PrefabInstance:
     - target: {fileID: 6343716052532805326, guid: 0aedacd4e56c3994e9359556194043ad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2018736710}
+      objectReference: {fileID: 667710204}
     - target: {fileID: 6343716052532805326, guid: 0aedacd4e56c3994e9359556194043ad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ReloadLevel
@@ -3874,7 +3902,7 @@ PrefabInstance:
     - target: {fileID: 9043891259855445518, guid: 0aedacd4e56c3994e9359556194043ad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2018736710}
+      objectReference: {fileID: 667710204}
     - target: {fileID: 9043891259855445518, guid: 0aedacd4e56c3994e9359556194043ad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: GoToMainMenu
@@ -4042,26 +4070,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.24, y: 0.15}
   m_EdgeRadius: 0
---- !u!1 &2018736709 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4890079468096238414, guid: 904f35cea1ad0e242a20b0f2bde13c53, type: 3}
-  m_PrefabInstance: {fileID: 222009910}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2018736710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2018736709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21d26c80921ec174eaefbc8489cb1822, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseCanvas
-  pauseCanvas: {fileID: 236591414}
-  player: {fileID: 774966542}
-  fader: {fileID: 684764130}
 --- !u!1001 &2041130420
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4207,7 +4215,7 @@ PrefabInstance:
     - target: {fileID: 687665613613919978, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
       propertyPath: groundCheck
       value: 
-      objectReference: {fileID: 1281429476}
+      objectReference: {fileID: 1019288790}
     - target: {fileID: 687665613613919978, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
       propertyPath: uiPickupYarn
       value: 

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 238423062854118520}
   - component: {fileID: 338441975017530421}
+  - component: {fileID: 7435322555041128765}
   m_Layer: 0
   m_Name: CanvasManager
   m_TagString: Untagged
@@ -44,4 +45,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ad97f302a74ea48802e1b3d8c65967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CanvasManager
+  fader: {fileID: 0}
+--- !u!114 &7435322555041128765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4890079468096238414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21d26c80921ec174eaefbc8489cb1822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseCanvas
+  pauseCanvas: {fileID: 0}
+  player: {fileID: 0}
   fader: {fileID: 0}
