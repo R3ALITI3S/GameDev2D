@@ -116,6 +116,30 @@ public class Buttons : MonoBehaviour
             }
         }
 
+        if (SceneManager.GetActiveScene().name == "Lvl 8")
+        {
+            if (isPressed)
+            {
+                gate.SetActive(true);
+            }
+            else
+            {
+                gate.SetActive(false);
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name == "Lvl 10")
+        {
+            if (isPressed)
+            {
+                gate.SetActive(true);
+            }
+            else
+            {
+                gate.SetActive(false);
+            }
+        }
+
         if (SceneManager.GetActiveScene().name == "Lvl 11" && gate != null)
         {
             if (isPressed && gate != null)

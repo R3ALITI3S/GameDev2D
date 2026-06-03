@@ -129,6 +129,8 @@ MonoBehaviour:
   anim: {fileID: 7125255915525170825}
   yarn: {fileID: 0}
   spriteRenderer: {fileID: 1636796522116444755}
+  yarnPrefab: {fileID: 0}
+  dropOffset: {x: 0.5, y: 0, z: 0}
   spriteLibrary: {fileID: 1284751245454025117}
   normalCat: {fileID: 7108339969198208228, guid: 3e606eed250714b43861b041c00e01f1, type: 3}
   catWithYarnCanThrow: {fileID: 7108339969198208228, guid: c5190fe188eed0e4ba3136749059ac13, type: 3}
@@ -308,8 +310,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0, b: 0, a: 1}
-      key1: {r: 0, g: 0, b: 0, a: 1}
+      key0: {r: 1, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 0.15566039, b: 0.15566039, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -364,7 +366,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 1.0068629, y: 3.9484432}
   m_AutoConfigureDistance: 1
-  m_Distance: 9.679351
+  m_Distance: 13.223757
   m_MaxDistanceOnly: 0
 --- !u!114 &7485594792177563960
 MonoBehaviour:

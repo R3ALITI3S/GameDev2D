@@ -57,6 +57,44 @@ public class Lever : MonoBehaviour
             }
         }
 
+        if (SceneManager.GetActiveScene().name == "Lvl 8")
+        {
+            if (leverBool)
+            {
+                obj.SetActive(true);
+                movingPlatform.enabled = true;
+            }
+            else
+            {
+                obj.SetActive(false);
+                movingPlatform.enabled = false;
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name == "Lvl 9")
+        {
+            if (leverBool)
+            {
+                obj.SetActive(true);
+            }
+            else
+            {
+                obj.SetActive(false);
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name == "Lvl 10")
+        {
+            if (leverBool)
+            {
+                obj.SetActive(true);
+            }
+            else
+            {
+                obj.SetActive(false);
+            }
+        }
+
         if (SceneManager.GetActiveScene().name == "Lvl 11")
         {
             if (leverBool)
