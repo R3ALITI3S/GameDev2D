@@ -810,7 +810,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1485854341}
         m_TargetAssemblyTypeName: CanvasManager, Assembly-CSharp
-        m_MethodName: GoToLvl1
+        m_MethodName: GoToLvl0
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

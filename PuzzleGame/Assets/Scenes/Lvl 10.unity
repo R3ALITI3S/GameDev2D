@@ -1841,7 +1841,7 @@ PrefabInstance:
       objectReference: {fileID: 1402391452}
     - target: {fileID: 5627345103687090476, guid: 1951cf9aa8fa8a3478024dc3d95c30af, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3141,7 +3141,7 @@ PrefabInstance:
     - target: {fileID: 687665613613919978, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
       propertyPath: yarnPrefab
       value: 
-      objectReference: {fileID: 674953078591217536, guid: 5bedde74d1087c44fba257b77111d09a, type: 3}
+      objectReference: {fileID: 2955972843955303017, guid: 7cd35c3e7a86f5b44b97cdf8742c3742, type: 3}
     - target: {fileID: 687665613613919978, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
       propertyPath: groundCheck
       value: 

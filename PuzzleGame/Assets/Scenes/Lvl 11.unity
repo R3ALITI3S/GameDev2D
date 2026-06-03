@@ -3419,11 +3419,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9e1cc86124e65144aeb80eaa1dd41e4, type: 3}
---- !u!4 &1281429476 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9058084329414950029, guid: db4fedfe70b7120468ae0662649297c8, type: 3}
-  m_PrefabInstance: {fileID: 259894089}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1381865639
 GameObject:
   m_ObjectHideFlags: 0
@@ -4594,7 +4589,7 @@ PrefabInstance:
     - target: {fileID: 687665613613919978, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
       propertyPath: groundCheck
       value: 
-      objectReference: {fileID: 1281429476}
+      objectReference: {fileID: 1635039918011528655}
     - target: {fileID: 687665613613919978, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
       propertyPath: uiPickupYarn
       value: 
@@ -4711,6 +4706,11 @@ PrefabInstance:
       addedObject: {fileID: 431810333}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
+--- !u!4 &1635039918011528655 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7241621297765195862, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
+  m_PrefabInstance: {fileID: 1635039918011528654}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3374764655868315212
 PrefabInstance:
   m_ObjectHideFlags: 0
