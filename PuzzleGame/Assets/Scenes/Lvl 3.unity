@@ -1600,6 +1600,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4274663025120470603, guid: c5519c5f393f3604b92713deeb45e638, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274663025120470603, guid: c5519c5f393f3604b92713deeb45e638, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274663025120470603, guid: c5519c5f393f3604b92713deeb45e638, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274663025120470603, guid: c5519c5f393f3604b92713deeb45e638, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -2482,6 +2494,10 @@ PrefabInstance:
       propertyPath: fader
       value: 
       objectReference: {fileID: 731891699}
+    - target: {fileID: 248515566456182874, guid: e0ab379401f685e4c9f27034b3ab3519, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 529679515598773341, guid: e0ab379401f685e4c9f27034b3ab3519, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.54239
