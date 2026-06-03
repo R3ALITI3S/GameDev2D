@@ -100,6 +100,9 @@ public class Grapple : MonoBehaviour
         {
             player.SetCannotThrow();
         }
+
+        // player colliders disable
+        //player.GetComponent<BoxCollider>().enabled = false;
     }
 
     void StopGrapple()

@@ -129,7 +129,7 @@ MonoBehaviour:
   anim: {fileID: 7125255915525170825}
   yarn: {fileID: 0}
   spriteRenderer: {fileID: 1636796522116444755}
-  yarnPrefab: {fileID: 0}
+  yarnPrefab: {fileID: 2955972843955303017, guid: 7cd35c3e7a86f5b44b97cdf8742c3742, type: 3}
   dropOffset: {x: 0.5, y: 0, z: 0}
   spriteLibrary: {fileID: 1284751245454025117}
   normalCat: {fileID: 7108339969198208228, guid: 3e606eed250714b43861b041c00e01f1, type: 3}
