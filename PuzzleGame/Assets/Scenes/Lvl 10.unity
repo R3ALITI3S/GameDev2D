@@ -2477,6 +2477,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cd35c3e7a86f5b44b97cdf8742c3742, type: 3}
+--- !u!114 &1406030063 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5271119327692401580, guid: 7cd35c3e7a86f5b44b97cdf8742c3742, type: 3}
+  m_PrefabInstance: {fileID: 1406030062}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &1438833059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3594,6 +3605,10 @@ PrefabInstance:
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 1635039918011528655}
+    - target: {fileID: 687665613613919978, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
+      propertyPath: uiPickupYarn
+      value: 
+      objectReference: {fileID: 1406030063}
     - target: {fileID: 934952083430376940, guid: 73842277059fb98468af7250a51e8a5c, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
       value: 0.005428314
