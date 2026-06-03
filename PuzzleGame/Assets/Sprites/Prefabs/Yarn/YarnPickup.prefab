@@ -175,6 +175,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6318103805700085824}
     m_Modifications:
+    - target: {fileID: 1169961133216858429, guid: d08f72b9528beec438fcfedc3e219356, type: 3}
+      propertyPath: m_text
+      value: "Pickup/Drop \nYarn On \"E\""
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169961133216858429, guid: d08f72b9528beec438fcfedc3e219356, type: 3}
+      propertyPath: m_fontSize
+      value: 2.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169961133216858429, guid: d08f72b9528beec438fcfedc3e219356, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 2.58
+      objectReference: {fileID: 0}
     - target: {fileID: 2243414564552652634, guid: d08f72b9528beec438fcfedc3e219356, type: 3}
       propertyPath: m_TagString
       value: Yarn
@@ -194,6 +206,14 @@ PrefabInstance:
     - target: {fileID: 2720445606381298725, guid: d08f72b9528beec438fcfedc3e219356, type: 3}
       propertyPath: m_TagString
       value: Yarn
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193889811259990970, guid: d08f72b9528beec438fcfedc3e219356, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193889811259990970, guid: d08f72b9528beec438fcfedc3e219356, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.29
       objectReference: {fileID: 0}
     - target: {fileID: 3429596925925464106, guid: d08f72b9528beec438fcfedc3e219356, type: 3}
       propertyPath: m_TagString

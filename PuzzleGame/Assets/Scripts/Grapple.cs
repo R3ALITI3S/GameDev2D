@@ -54,7 +54,7 @@ public class Grapple : MonoBehaviour
             ropeLine.SetPosition(1, grapplePoint);
         }
 
-        if (Input.GetMouseButtonDown(1) && isGrappling)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrappling)
         {
             StopGrapple();
         }
