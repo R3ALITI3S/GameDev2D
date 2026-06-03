@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour
 
     private bool isWalking;
 
+    private float timer;
+
     public static PlayerController Instance;
 
     // 3 gameplay states
@@ -81,7 +83,7 @@ public class PlayerController : MonoBehaviour
         Mathf.Abs(transform.localScale.x),
         transform.localScale.y,
         transform.localScale.z
-);
+        );
     }
 
     void Update()
@@ -108,13 +110,18 @@ public class PlayerController : MonoBehaviour
         if (uiPickupYarn != null)
             uiPickupYarn.gameObject.SetActive(pickupYarn);
 
+        timer += Time.deltaTime;
+        Debug.Log("Timer: " + timer);
+
         // Pick up yarn
         bool enterPressed = (Keyboard.current.enterKey != null && Keyboard.current.enterKey.wasPressedThisFrame);
 
         if (pickupYarn && enterPressed)
         {
+            
             if (yarn != null)
             {
+                timer = 0f;
                 Destroy(yarn);
                 yarn = null;
 
@@ -128,11 +135,15 @@ public class PlayerController : MonoBehaviour
                 uiPickupYarn.gameObject.SetActive(false);
         }
 
-        // Drop equipped yarn (press E)
-        bool dropPressed = (Keyboard.current.eKey != null && Keyboard.current.eKey.wasPressedThisFrame);
+        // Drop equipped yarn (press Enter)
+        bool dropPressed = (Keyboard.current.enterKey != null && Keyboard.current.enterKey.wasPressedThisFrame);
         if ((currentState == CatState.YarnCanThrow || currentState == CatState.YarnCannotThrow) && dropPressed)
         {
-            DropYarn();
+            if (timer >= 0.5f)
+            {
+                Debug.Log("Dropping yarn plz");
+                DropYarn();
+            }
         }
 
         // walk no delay
