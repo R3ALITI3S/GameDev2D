@@ -1949,6 +1949,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: button2
       objectReference: {fileID: 0}
+    - target: {fileID: 2086647539616007840, guid: 1951cf9aa8fa8a3478024dc3d95c30af, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3119724115559873527, guid: 1951cf9aa8fa8a3478024dc3d95c30af, type: 3}
       propertyPath: sr
       value: 
