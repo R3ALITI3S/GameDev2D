@@ -45,6 +45,16 @@ public class CanvasManager : MonoBehaviour
         });
     }
 
+    public void GoToIntro()
+    {
+        fader.gameObject.SetActive(true);
+        LeanTween.scale(fader, Vector3.zero, 0f);
+        LeanTween.scale(fader, new Vector3(1, 1, 1), 0.5f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
+        {
+            Invoke("LoadIntro", 0.5f); //Load the level menu after the transition is complete
+        });
+    }
+
     public void GoToLvl0()
     {
         fader.gameObject.SetActive(true);
@@ -182,6 +192,11 @@ public class CanvasManager : MonoBehaviour
     private void LoadLevelSelect()
     {
         SceneManager.LoadScene("LevelSelect");
+    }
+
+    private void LoadIntro()
+    {
+        SceneManager.LoadScene("Intro");
     }
 
     private void LoadLvl0()
