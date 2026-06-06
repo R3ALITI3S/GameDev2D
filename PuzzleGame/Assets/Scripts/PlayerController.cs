@@ -88,6 +88,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (GetComponent<CrawlMovement>() != null && GetComponent<CrawlMovement>().enabled)
+    return;
+
         // INPUT (cached properly)
         moveX = 0f;
 
