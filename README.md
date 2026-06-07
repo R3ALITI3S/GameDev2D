@@ -2,13 +2,24 @@
 
 This repository contains two development iterations created during the **Game Development** course.
 
+<img width="60" height="60" alt="cattoidleyarn" src="https://github.com/user-attachments/assets/bb2f62a4-3e27-44e7-a2a4-bb9c3cc06528" />
+
 
 ## Projects
 The project is organized into two main development iterations: 
 
 Game Iteration 1 – Game Dev 2D = Secrets of the Runes
 
+🎮 Play the prototype:
+    <a href="https://r3aliti3s.itch.io/secrets-of-the-runes" target="_blank">
+        Secrets of the Runes on itch.io
+
 Game Iteration 2 – Puzzle Game = Purrfectly Tangled
+
+🎮 Play the prototype:
+    <a href="https://r3aliti3s.itch.io/purrfectly-tangled" target="_blank">
+        Purrfectly Tangled on itch.io
+
 
 ## Repository Structure
 
