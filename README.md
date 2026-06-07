@@ -1,9 +1,8 @@
-# GameDev2D
+<img width="1500" height="250" alt="Nyt Projekt (1)" src="https://github.com/user-attachments/assets/1e0e0203-9d03-445c-b633-d37a559bc896" />
+
+# Welcome to GameDev2D - the repository containing Purrfectly Tangled
 
 This repository contains two development iterations created during the **Game Development** course.
-
-<img width="60" height="60" alt="cattoidleyarn" src="https://github.com/user-attachments/assets/bb2f62a4-3e27-44e7-a2a4-bb9c3cc06528" />
-
 
 ## Projects
 The project is organized into two main development iterations: 
@@ -20,6 +19,14 @@ Game Iteration 2 – Puzzle Game = Purrfectly Tangled
     <a href="https://r3aliti3s.itch.io/purrfectly-tangled" target="_blank">
         Purrfectly Tangled on itch.io
 
+<p align="center">
+  <img
+    width="900"
+    height="150"
+    alt="GameDev2D Banner"
+    src="https://github.com/user-attachments/assets/b493013c-75b2-4379-bf37-5944c8cc1c32"
+  />
+</p>
 
 ## Repository Structure
 
@@ -37,14 +44,18 @@ The final game is located in:
 PuzzleGame
 ```
 
+
+
 To open the project:
 
 1. Launch Unity Hub.
 2. Click **Open Project**.
-3. Select the **GameDev2D** folder and open the **Puzzle Game** folder.
-4. Open the project in the recommended Unity version, we used version 6000.4.4f1 .
+3. Go into the **GameDev2D** folder and open the **Puzzle Game** folder.
+4. Open the project in the recommended Unity version, we used version 6000.4.4f1
 
 Have fun exploring **Purrfectly Tangled**!
 
-<img width="240" height="60" alt="cattoidleyarnyarn-Sheet" src="https://github.com/user-attachments/assets/b7bd87ad-e948-4820-a5ba-a364a0aba2f7" />
-
+<p align="center">
+  <img
+    <img width="400" height="400" alt="cattoidleyarn_scaled_32x_minified" src="https://github.com/user-attachments/assets/135e06e1-cd13-4192-85f2-af2533fa887e" />
+</p>
